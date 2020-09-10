@@ -1,0 +1,62 @@
+:root {
+    --open_bg:#5FAD41;
+    --close-bg:#fff ;
+
+    --open_btn:#eee;
+    /* --open_btn:#FF7F11; */
+    --close_btn: #FF7F11;
+
+
+
+
+  }
+
+  
+.btn {
+    width: 50px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid #aaa;
+    background: var(--close-bg);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background: cornflowerblue; */
+    margin: 10px;
+}
+
+.btn.btn_open {
+    background: var(--open_bg);
+
+}
+
+.btn > .container {
+    /* border: 1px solid red; */
+    position: relative;
+    width: 85%;
+    height: 85%;
+    left: 1%;
+
+}
+
+.btn .circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 20px;
+    background: var(--close_btn);
+
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    /* transform: translateY(-50%); */
+    transform: translateY(-50%);
+    transition: .5s;
+
+}
+
+.circle.open {
+    left: 100%;
+    background: var(--open_btn);
+    transform: translate(-100%, -50%);
+}

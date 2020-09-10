@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./btn.css"> -->
+    <style>
+
+    </style>
+    <script src="./btn/btn3.js"></script>
+</head>
+
+<body>
+
+    <div id="btn1" class="btn" ref="btn">
+        <div class="container" @click="toggle(event)">
+            <div class="circle" ref="circle"></div>
+        </div>
+    </div>
+
+    <div id="btn2" class="btn" ref="btn">
+        <div class="container" @click="toggle(event)">
+            <div class="circle" ref="circle"></div>
+        </div>
+    </div>
+
+    <script>document.write(productHTML('btn4', true))</script>
+
+
+    <script>document.write(`<h1>1233</h1>`)</script>
+
+
+    <div id="btn3" class="btn" ref="btn">
+        <div class="container" @click="toggle(event)">
+            <div class="circle" ref="circle"></div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <script>
+
+
+
+        let vue_obj1 = vue_obj('#btn1');
+        console.log(vue_obj1);
+
+        let vue_obj2 = vue_obj('#btn2');
+        console.log(vue_obj2);
+
+
+        let btn1 = new Vue(vue_obj1);
+        let btn2 = new Vue(vue_obj2);
+
+        let btn3 = new Vue(vue_obj('#btn3'));
+        console.log(btn3);
+
+        // btn_open(btn3);
+        // btn_close(btn3);
+      
+        btn3.toggle();
+
+
+        // btn3 += {
+        //     data: {
+        //         status2: {
+        //             toggle: false
+        //         }
+        //     }
+        // }
+
+        // let btn4 = new Vue(vue_obj('#btn4'));
+
+        console.log(productHTML('#btn5'));
+
+
+        // let btn1 = new Vue({
+        //     el: '#btn1',
+        //     data: {
+        //         status: {
+        //             toggle: false,
+        //         }
+        //     },
+        //     methods: {
+        //         toggle(e) {
+
+
+
+        //             if (!this.status.toggle) {
+        //                 this.btn_open();
+
+        //             } else {
+        //                 this.btn_close();
+
+        //             }
+
+        //             console.log('toggle', e.target);
+        //             this.status.toggle = !this.status.toggle;
+
+        //         },
+        //         btn_open() {
+        //             this.$refs.circle.classList.add('open');
+        //             this.$refs.btn.classList.add('btn_open');
+        //         },
+        //         btn_close() {
+        //             this.$refs.circle.classList.remove('open');
+        //             this.$refs.btn.classList.remove('btn_open');
+        //         }
+        //     }
+        // })
+
+    </script>
+</body>
+
+</html>
