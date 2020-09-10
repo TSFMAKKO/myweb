@@ -1,883 +1,924 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        user-select: none;
-        box-sizing: border-box;
-      }
-
-      .wrap {
-        margin: 100px auto;
-        border: 1px solid #aaa;
-        overflow: hidden;
-      }
-
-      .ul {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        /* 置中 */
-        /* margin: 0 auto; */
-        /* border: 1px solid #aaa; */
-        justify-content: center;
-      }
-
-      .li {
-        height: 100px;
-        text-align: center;
-        margin: 1% 1%;
-        /*  */
-        box-sizing: border-box;
-        /* border: 1px solid #aaa; */
-        cursor: pointer;
-        overflow: hidden;
-        position: relative;
-        /* opacity: 0.8; */
-      }
-
-      .li .order {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        z-index: 3;
-        background: black;
-        color: white;
-      }
-
-      .li .item_detail {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.3);
-        transition: 0.5s;
-        z-index: 2;
-      }
-
-      .item_detail span {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-
-      .li img {
-        opacity: 0.8;
-      }
-
-      .li:hover img {
-        transform: scale(1.1, 1.1);
-        transition: transform 0.5s;
-        opacity: 1;
-      }
-
-      .li:hover .item_detail {
-        background-color: rgba(0, 0, 0, 1);
-        color: white;
-      }
-
-      .li img {
-        width: 100%;
-      }
-
-      #shopping_cart {
-        position: fixed;
-        z-index: 2;
-        right: 40px;
-        top: 40px;
-        width: 200px;
-        /* height: 100px; */
-        border: 1px solid #aaa;
-        background-color: white;
-        /* overflow: hidden; */
-      }
-
-      /* 以下是詳細購物車 */
-      #shopping_cart_all {
-        width: 600px;
-        min-height: 100vh;
-        margin: 0 auto;
-        border: 1px solid #aaa;
-        overflow: hidden;
-      }
-
-      #shopping_cart_all .container {
-        display: flex;
-        flex-direction: column;
-      }
-
-      #shopping_cart_all .container p {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 10px;
-        align-items: center;
-      }
-
-      #shopping_cart_all button {
-        /* padding: 5px 10px; */
-        width: 30px;
-        height: 30px;
-      }
-
-      #shopping_cart_all .delete button {
-        width: 35px;
-      }
-
-      body {
-        /* background: rgba(0, 0, 0, 0.2); */
-      }
-
-      .item_header {
-        display: flex;
-        width: 550px;
-        /* 上下 左右 */
-        margin: 0 auto;
-        /* height: 30px; */
-        background-color: #fff;
-        border-radius: 3px;
-        padding-left: 10px;
-      }
-
-      /* 底下所有的div */
-      /* ~所有的兄弟  +隔壁一個兄弟 */
-      .item_header div {
-        width: 20%;
-        color: #888;
-        /* 置中 */
-        line-height: 30px;
-      }
-
-      .item_header .operate {
-        width: 30%;
-      }
-
-      .item_header .item_detail {
-        width: 30%;
-      }
-
-      .item_header .sort {
-        cursor: pointer;
-      }
-
-      .item_body {
-        margin-top: 20px;
-        height: 100px;
-        align-items: center;
-      }
-
-      .item_body .price {
-        transform: translateX(-10%);
-      }
-
-      .item_body .item_detail {
-        /* border: 1px solid #aaa; */
-        width: 20%;
-        margin-right: 10%;
-        overflow: hidden;
-        position: relative;
-      }
-
-      .item_body .item_detail img {
-        width: 100%;
-        /* width: 80px; */
-        height: 80px;
-        /* border-radius: 3px; */
-        float: left;
-        transition: 0.5s;
-      }
-
-      .item_body .count {
-        position: relative;
-        left: -5%;
-        /* transform: translateX(-50%); */
-      }
-
-      .item_detail:hover img {
-        transform: scale(1.2);
-      }
-
-      .del_confirm {
-        position: fixed;
-        width: 100%;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.15);
-        /* transition: background 5s; */
-        top: 0;
-        left: 0;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .del_confirm .container {
-        width: 300px;
-        height: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #aaa;
-        flex-direction: column;
-        background-color: white;
-      }
-
-      .del_confirm .container p + p {
-        margin-top: 10px;
-      }
-
-      .del_confirm .container button {
-        padding: 2px 5px;
-      }
-
-      @media (min-width: 1200px) {
-        .wrap {
-          width: 80%;
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            user-select: none;
         }
+
+        .wrap {
+            margin: 100px auto;
+            border: 1px solid #aaa;
+            overflow: hidden;
+        }
+
+        .ul {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            /* 置中 */
+            /* margin: 0 auto; */
+            /* border: 1px solid #aaa; */
+            justify-content: center;
+
+        }
+
+        .ul>div {
+            border-radius: 10px;
+        }
+
+
 
         .li {
-          width: 20%;
-        }
+            height: 100px;
+            text-align: center;
+            margin: 1% 1%;
+            /*  */
+            box-sizing: border-box;
+            /* border: 1px solid #aaa; */
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            /* opacity: 0.8; */
 
-        .li:last-child,
-        .li:nth-child(29) {
-          /* background-color: red; */
-          position: relative;
-          left: -22%;
-        }
-      }
-
-      @media (min-width: 769px) and (max-width: 1199px) {
-        .wrap {
-          width: 90%;
-        }
-
-        .li {
-          width: 30%;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .wrap {
-          width: 95%;
-        }
-
-        .li {
-          width: 100%;
-          height: 30%;
         }
 
         .li .item_detail {
-          font-size: 36px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: .5s;
+            z-index: 2;
+
         }
 
+        .li img {
+            opacity: 0.8;
+        }
+
+        .li .order {
+            position: absolute;
+            top: 0;
+            right: -0px;
+            font-size: 24px;
+            z-index: 2;
+            color: red;
+        }
+
+        .li:hover img {
+            transform: scale(1.1, 1.1);
+            transition: transform .5s;
+            opacity: 1;
+
+        }
+
+        .li:hover .item_detail {
+            background-color: rgba(0, 0, 0, 1);
+            color: white;
+        }
+
+        .li img {
+            width: 100%;
+        }
+
+        @media (min-width: 1200px) {
+            .wrap {
+                width: 80%;
+            }
+
+            .li {
+                width: 20%;
+            }
+
+            .li:last-child,
+            .li:nth-child(29) {
+                /* background-color: red; */
+                position: relative;
+                left: -22%;
+            }
+        }
+
+
+
+        #shopping_cart {
+            position: fixed;
+            z-index: 2;
+            right: 40px;
+            bottom: 40px;
+            width: 200px;
+            /* height: 100px; */
+            border: 1px solid #aaa;
+            background-color: white;
+            /* overflow: hidden; */
+        }
+
+        /* 以下是詳細購物車 */
         #shopping_cart_all {
-          /* width: 100%; */
-          /* overflow: hidden; */
+            width: 600px;
+            min-height: 100vh;
+            margin: 0 auto;
+            border: 1px solid #aaa;
+            overflow: hidden;
         }
 
-        #shopping_cart_all .amount {
-          display: none;
+        #shopping_cart_all .container {
+            display: flex;
+            flex-direction: column;
         }
 
-        .item_header div:not(:first-child) {
-          width: 15%;
+        #shopping_cart_all .container p {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            align-items: center;
         }
-      }
 
-      .item_detail span {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.15);
-        color: red;
-        z-index: 2;
-      }
+        #shopping_cart_all button {
+            /* padding: 5px 10px; */
+            width: 30px;
+            height: 30px;
+        }
 
-      .item_detail:hover span {
-        /* background: black; */
-        color: white;
-        transition: 0.5s;
-        z-index: 2;
-      }
+        #shopping_cart_all .delete button {
+            width: 35px;
+        }
 
-      .item {
-        display: flex;
-        flex-wrap: wrap;
-      }
+        body {
+            /* background: rgba(0, 0, 0, 0.2); */
+        }
 
-      .item p {
-        display: block;
-        width: 100%;
-      }
+        .item_header {
+            display: flex;
+            width: 550px;
+            /* 上下 左右 */
+            margin: 0 auto;
+            /* height: 30px; */
+            background-color: #fff;
+            border-radius: 3px;
+            padding-left: 10px;
+        }
 
-      .item .img {
-        position: relative;
-      }
+        /* 底下所有的div */
+        /* ~所有的兄弟  +隔壁一個兄弟 */
+        .item_header div {
+            width: 20%;
+            color: #888;
+            /* 置中 */
+            line-height: 30px;
+        }
 
-      .item .img img {
-        width: 100%;
-        vertical-align: middle;
-      }
+        .item_header .operate {
+            width: 30%;
+        }
 
-      .item .img span {
-        position: absolute;
-        left: 0;
-        top: 0;
-        color: red;
-        cursor: pointer;
-      }
+        .item_header .item_detail {
+            width: 30%;
+        }
 
-      .item .num {
-        width: 300px;
-      }
+        .item_body {
+            margin-top: 20px;
+            height: 100px;
+            align-items: center;
+        }
 
-      .item .num input {
-        width: 50px;
-      }
+        .item_body .price {
+            transform: translateX(-10%);
+        }
 
-      .item .num button {
-        width: 20px;
-        height: 20px;
-      }
+        .item_body .item_detail {
+            /* border: 1px solid #aaa; */
+            width: 20%;
+            margin-right: 10%;
+            overflow: hidden;
+        }
+
+        .item_body .item_detail img {
+            width: 100%;
+            /* width: 80px; */
+            height: 80px;
+            /* border-radius: 3px; */
+            float: left;
+
+        }
+
+        .item_body .count {
+            position: relative;
+            left: -5%;
+            /* transform: translateX(-50%); */
+        }
+
+        .item_detail img {}
+
+        .del_confirm {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.15);
+            /* transition: background 5s; */
+            top: 0;
+            left: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .del_confirm .container {
+            width: 300px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #aaa;
+            flex-direction: column;
+            background-color: white;
+        }
+
+        .del_confirm .container p+p {
+            margin-top: 10px;
+        }
+
+        .del_confirm .container button {
+            padding: 2px 5px;
+        }
+
+        @media (min-width: 769px) and (max-width: 1199px) {
+            .wrap {
+                width: 90%;
+            }
+
+            .li {
+                width: 30%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .wrap {
+                width: 95%;
+            }
+
+            .li {
+                width: 100%;
+                height: 30%;
+                position: relative;
+            }
+
+            .li .item_detail {
+                font-size: 36px;
+            }
+
+            .li .order {
+                font-size: 36px;
+            }
+
+            #shopping_cart_all {
+                /* width: 100%; */
+                /* overflow: hidden; */
+            }
+
+            #shopping_cart_all .amount {
+                display: none;
+            }
+
+            .item_header div:not(:first-child) {
+                width: 15%;
+            }
+        }
+
+        .btn_filter,
+        .shopping_cart_all_a {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn_filter button,
+        #shopping_cart_all a {
+            background: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            transition: .5s;
+            cursor: pointer;
+        }
+
+        .btn_filter button:focus,
+        .container button:focus {
+            /* border: none; */
+            outline: none;
+        }
+
+        .btn_filter button.active,
+        .btn_filter button:hover,
+        #shopping_cart_all a:hover,
+        .container button:hover {
+            background-color: royalblue;
+            color: white;
+        }
+
+
+
+        #shopping_cart_all a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container img {
+            border-radius: 10px;
+        }
+
+        .container button {
+            border: 1px solid #aaa;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .container .delete {}
+
+        .container .delete button {}
     </style>
-  </head>
-  <body>
-    <div id="app">
-      <div class="wrap">
+</head>
+
+<body>
+
+    <div class="wrap" id="app">
         <!-- main -->
-        <div class="ul" v-show="show_page=='main'">
-          <div
-            v-for="value,key of fetch_data"
-            class="li"
-            @click="GoItem(key,value)"
-            :money="value.money"
-            :key="key"
-          >
-            <!-- <div class="order" v-show="cart_item==key" @click="add_item(key,value)">訂購</div> -->
-            <div class="item_detail">{{key}} 價格{{value.money}}</div>
-
-            <img :src="value.imgsrc" :alt="key" />
-          </div>
+        <div class="btn_filter" v-show="status.dom_item_show=='main_page'">
+            <button @click="money_soft('filter_cancel')" ref="soft_cancel" class="active">還原</button>
+            <button @click="money_soft('small')" ref="soft_small">金額小到大</button>
+            <button @click="money_soft('big')" ref="soft_big">金額大到小</button>
         </div>
 
-        <!-- 購買單品 -->
-        <div class="item" v-show="show_page=='item'">
-          <p>
-            <a href="#" @click="GoMain">返回</a>
-          </p>
-          <div class="container">
-            <div class="img" v-if="cart_item">
-              <img :src="cart_item.value.imgsrc" alt="" />
-              <span>{{cart_item.key}}</span>
+
+        <!-- item -->
+        <div class="item" v-show="status.dom_item_show=='item'">
+            <div>
+                <img :src="item_page_data.imgsrc" alt="" srcset="">
             </div>
-            <p class="num">
-              <button @click="item_num -=1">-</button
-              ><input type="num" v-model="item_num" /><button
-                @click="item_num +=1"
-              >
-                +
-              </button>
-            </p>
-            <p>
-              <span @click="add_item()">加入購物車</span>
-              <span @click="GoCheckout(event,true)">結帳</span>
-            </p>
-          </div>
+            <div>
+                <span @click="clickHandler(item_page_data)">加入購物車</span>
+                <span @click="CheckoutHandler(item_page_data)">結帳</span>
+
+            </div>
         </div>
 
-        <!-- smaill(cart) -->
-        <div
-          id="shopping_cart"
-          v-show="show_page=='main' && shop_cart_lenght>0 || show_page=='item' && shop_cart_lenght>0"
-        >
-          <p>已加入購物車 <button @click="GoCheckout">按此結帳</button></p>
-          <p v-for="(value, key) of shop_cart_all">
-            {{key}}有{{value.count}}個
-          </p>
+        <!-- 1.main_page  2.item  3.Checkout -->
+
+        <!-- Checkout main_page -->
+        <div class="ul" v-show="status.dom_item_show=='main_page'">
+            <div v-for="value,key of data_filter" class="li" @click="item_page(value)" :money="value.money" :key="key">
+                <div class="item_detail">
+                    {{key}}
+                    價格{{value.money}}
+                </div>
+
+                <img :src="value.imgsrc" :alt="key">
+                <!-- <div class="order" @click="clickHandler(key,value,event)">訂購</div> -->
+            </div>
+        </div>
+
+        <!-- 購物清單(小) -->
+        <div id="shopping_cart" v-if="itemList_lenght2" v-show="status.dom_item_show=='main_page'">
+            <p>已加入購物車 <button @click="CheckoutHandler">按此結帳</button></p>
+            <p v-for="(value, key) of itemList">{{key}}有{{value.count}}個</p>
+            <p v-for="item of itemList2"></p>
         </div>
 
         <!-- 購物清單(全部) -->
-        <div id="shopping_cart_all" v-show="show_page=='all'">
-          <!-- <a href="#" @click="show_page='main'">返回main</a> -->
-          <a href="#" @click="GoMain">返回main</a>
-          <a href="#" @click="show_page='item'">返回item</a>
-          <a href="#" @click="clearShoppingCart">清空購物車</a>
-          <a href="#" @click="CheckOut">結帳</a>
-          <!-- <p>詳細購物項目</p>
+        <div id="shopping_cart_all" v-show="status.dom_item_show=='Checkout'">
+            <div class="shopping_cart_all_a">
+                <a href="#" @click="returnHandler">返回</a>
+                <a href="#" @click="clearShoppingCart">清空購物車</a>
+                <a href="#" @click="CheckoutHandler2">結帳</a>
+            </div>
+            <!-- <p>詳細購物項目</p>
                 <div class="container">
-                    <p v-for="(value, key) of shop_cart_all" :title="key"> {{key.substr(0,3)}}...
+                    <p v-for="(value, key) of itemList" :title="key"> {{key.substr(0,3)}}...
                         <button @click="calcHandler(-1,key,value)">-1</button>
                         <button @click="calcHandler(1,key,value)">+1</button>
     
                         {{ value }}
                         個</p> -->
-          <!-- <p v-for="item of shop_cart_all"></p> -->
+            <!-- <p v-for="item of itemList"></p> -->
 
-          <div class="container">
-            <!-- 頭 -->
-            <div class="item_header">
-              <!-- 固定的 -->
-              <div class="item_detail">商品</div>
-              <div class="price sort" @click="sort_data(event,'price')">
-                單價
-                <span v-show="sort_status.item=='price'"
-                  >{{ sort_icon[sort_status.count] }}</span
-                >
-              </div>
-              <div class="count sort" @click="sort_data(event,'count')">
-                數量
-                <span v-show="sort_status.item=='count'"
-                  >{{ sort_icon[sort_status.count] }}</span
-                >
-              </div>
-              <div class="amount sort" @click="sort_data(event,'amount')">
-                總計
-                <span v-show="sort_status.item=='amount'"
-                  >{{ sort_icon[sort_status.count] }}</span
-                >
-              </div>
-              <div class="operate">
-                <span>總價:</span><span> ${{total_money}} </span>
-              </div>
+            <div class="container">
+                <!-- 頭 -->
+                <div class="item_header">
+                    <!-- 固定的 -->
+                    <div class="item_detail">商品</div>
+                    <div class="price">單價</div>
+                    <div class="count">數量</div>
+                    <div class="amount">總計</div>
+                    <div class="operate"><span>總價:</span><span>
+                            ${{total_money}}
+                        </span></div>
+                </div>
+
+                <!-- 購買物的主體 -->
+                <div class="item_header item_body" v-for="(item, key, index) of itemList">
+                    <!-- 不斷重複的item開始 -->
+                    <div class="item_detail">
+                        <img :src="item.imgsrc" :alt="key">
+                        <!-- <div class="name">{{key}}</div> -->
+                    </div>
+
+                    <!-- 後面沒span -->
+                    <div class="price"><span>$</span>{{item.money}}</div>
+                    <!--  -->
+                    <div class="count">
+                        <button @click="handleSub(key)">-</button>
+                        {{item.count}}
+                        <button @click="handlePlus(key)">+</button>
+                    </div>
+
+
+                    <!-- 總價 -->
+                    <div class="amount">
+                        <span>$</span>{{item.money * item.count}}
+                    </div>
+                    <div class="operate delete">
+                        <button @click="delHandler(key)">刪除</button>
+                    </div>
+                    <!-- 不斷重複的item結束 -->
+
+                </div>
             </div>
-
-            <!-- 購買物的主體 -->
-            <div
-              class="item_header item_body"
-              v-for="(item, key, index) of shop_cart_all"
-            >
-              <!-- 不斷重複的item開始 -->
-              <div class="item_detail">
-                <span>{{key}}</span>
-                <img :src="item.imgsrc" :alt="key" />
-                <!-- <div class="name">{{key}}</div> -->
-              </div>
-
-              <!-- 後面沒span -->
-              <div class="price"><span>$</span>{{item.money}}</div>
-              <!--  -->
-              <div class="count">
-                <button @click="handleSub(key)">-</button>
-                {{item.count}}
-                <button @click="handlePlus(key)">+</button>
-              </div>
-
-              <!-- 總價 -->
-              <div class="amount">
-                <span>$</span>{{item.money * item.count}}
-              </div>
-              <div class="operate delete">
-                <button @click="delHandler(key)">刪除</button>
-              </div>
-              <!-- 不斷重複的item結束 -->
-            </div>
-          </div>
         </div>
 
-        <!-- del_confirm -->
-        <div class="del_confirm" v-show="del_confirm">
-          <div class="container">
-            <p>你是否要刪除</p>
-            <p>
-              <button @click="confirmDelete">確認</button>
-              <button @click="del_confirm=false">取消</button>
-            </p>
-          </div>
+        <!-- confirm -->
+        <div class="del_confirm" v-show="status.dom_del_confirm">
+            <div class="container">
+                <p>你是否要刪除</p>
+                <p>
+                    <button @click="confirmHandler">確認</button>
+                    <button @click="status.dom_del_confirm=false">取消</button>
+                </p>
+
+            </div>
         </div>
-      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
     <script>
-      let newUrl, oldUrl, id;
+        // let dataList = { '項目1': 2500, '項目2': 3000, '項目3': 3500, '項目4': 4000, '項目5': 4500, '項目6': 5000, '項目7': 5500, '項目8': 6000, '項目7': 6500, '項目8': 7000, '項目9': 7500, '項目10': 8000, '項目11': 8500, '項目12': 9000, '項目13': 9500, '項目14': 10000, '項目15': 9750, '項目16': 9500, '項目17': 9250, '項目18': 9000, '項目19': 8750, '項目20': 8500, '項目21': 8250, '項目22': 8000, '項目23': 7750, '項目24': 7500, '項目25': 7250, '項目26': 7000, '項目27': 6750, '項目28': 6500, '項目29': 6250, '項目30': 6000 };
 
-      window.addEventListener("hashchange", function (e) {
-        console.log(e);
-        // console.log(e);
-        console.log(e.newURL.split("#")[1]);
-        newUrl = e.newURL;
-        oldUrl = e.oldURL;
-        id = newUrl.split("#")[1];
-        console.log(id);
+        // 改成 '項目1':{money:2500, imgsrc='http://xxxxxx'}
 
-        if (id == "item") {
-          vm.$data.show_page = "item";
+        //   "https://picsum.photos/id/1/300/200",
+        //   "https://picsum.photos/id/2/300/400",
+        //   "https://picsum.photos/id/3/100/150",
+        //   "https://picsum.photos/id/4/200/300",
+        //   "https://picsum.photos/id/5/300/200"
+
+        function Math_random(max) {
+            let num = Math.random() * max;
+            console.log(num);
+            return Math.ceil(num);
         }
 
-        if (id == "main" || id == undefined) {
-          vm.$data.show_page = "main";
+
+
+        let dataList2 = new Object();
+        for (let i = 0; i < 30; i++) {
+            let item = `項目${i + 1}`;
+            // console.log(item);
+            // dataList2[item].count = 500 * (i + 1);
+            dataList2[item] = {};
+
+            // 100~10000的價格
+            let Random_int = Math_random(100) * 100;
+            console.log(Random_int);
+            // dataList2[item].money = 500 * (i + 1);
+            dataList2[item].money = Random_int;
+            dataList2[item].imgsrc = `https://picsum.photos/id/${i + 100}/300/200`;
+
         }
 
-        if (id == "all") {
-          vm.$data.show_page = "all";
-        }
+        console.log(dataList2);
 
-        // let a_index = nav_a_id_index(id);
-        // console.log(a_index);
-      });
-
-      function Math_random(max) {
-        let num = Math.random() * max;
-        console.log(num);
-        return Math.ceil(num);
-      }
-
-      let fetch_data = new Object();
-      for (let i = 0; i < 30; i++) {
-        let item = `項目${i + 1}`;
-        // console.log(item);
-        // fetch_data[item].count = 500 * (i + 1);
-        fetch_data[item] = {};
-
-        // 100~10000的價格
-        let Random_int = Math_random(100) * 100;
-        console.log(Random_int);
-        // fetch_data[item].money = 500 * (i + 1);
-        fetch_data[item].money = Random_int;
-        fetch_data[item].imgsrc = `https://picsum.photos/id/${i + 1}/300/200`;
-      }
-
-      console.log(fetch_data);
-
-      //   let vue_object = function () {
-      //     return {};
-      //   };
-
-      let vue_object = function () {
-        return {
-          ...calc_object(),
-          sort_data,
-          ...all_btn_left(),
-          ...del_item(),
+        let dataObj = {
+            itemList: {},
+            itemList2: [],
+            itemList_lenght2: 0,
+            // status.dom_item_show: true,
+            // dataList,
+            dataList2,
+            total_money: 0,
+            status: {
+                dom_item_show: 'main_page',
+                dom_del_confirm: false,
+                filter_data: false,
+            },
+            // dom_del_confirm: false,
+            // filter_data: false,
+            del_item_key: null,
+            data_temp: [],
+            dataAll_obj: {},
         };
-      };
 
-      let calc_object = function () {
-        return {
-          handleSub(key) {
-            console.log(key);
-            console.log(this.shop_cart_all);
-            if (this.shop_cart_all[key].count >= 2) {
-              this.shop_cart_all[key].count -= 1;
-            }
-            console.log(this.shop_cart_all[key].count);
-            this.calc_total_money();
-          },
-          handlePlus(key) {
-            console.log(key);
-            this.shop_cart_all[key].count += 1;
-            console.log(this.shop_cart_all[key].count);
-            this.calc_total_money();
-          },
+        let dataObj2 = {
+            itemList: {},
+            itemList2: [],
+            itemList_lenght2: 0,
+            dataList2,
+            total_money: 0,
+            status: {
+                dom_item_show: 'main_page',
+                dom_del_confirm: false,
+                filter_data: false,
+            },
+            del_item_key: null,
+            data_temp: [],
+            dataAll_obj: {},
+            active: [],
 
-          calc_total_money(e) {
-            let keys = Object.keys(this.shop_cart_all);
-            console.log(keys);
-            let total = 0;
-            keys.forEach((key) => {
-              console.log(key);
-              let item = this.shop_cart_all[key];
-              let money = item.money;
-              let count = item.count;
-              total += money * count;
-            });
-            console.log(total);
-            this.total_money = total;
-            // return total;
-            this.sort_status.temp_data = Object.assign({}, this.shop_cart_all);
-          },
+            xxx_api() {
+                // this.value = 0;
+                // this.set = function (value) {
+                //     this.value = value;
+                // };
+                // this.get = function () {
+                //     return this.value;
+                // }
+                this.value = 0
+                return {
+                    value: this.value,
+                    get() {
+                        return this.value;
+                    },
+                    set(value) {
+                        this.value = value;
+                    }
+                }
+            },
         };
-      };
 
-      function sort_data(e, Indicate) {
-        console.log(e);
-        // price count amount
-        console.log(Indicate);
-        // 儲存狀態
+        let dataObj3 = {
+            ul: {
+                dom_item_show: true,
+            },
+            shopping_cart: {
 
-        this.sort_status.item = Indicate;
-        console.log(typeof this.sort_status.item);
+            },
+            shopping_cart_all: {
 
-        if (this.sort_status.Indicate == Indicate) {
-          // 狀態+1
-          this.sort_status.count += 1;
-        } else {
-          this.sort_status.Indicate = Indicate;
-          this.sort_status.count = 1;
-        }
+            },
+            del_confirm: {
 
-        if (this.sort_status.count == 3) this.sort_status.count = 0;
-        console.log(this.sort_status.count);
-
-        console.log(this.shop_cart_all);
-        let item_ary = [];
-
-        if (Indicate == "price") {
-          for (item in this.shop_cart_all) {
-            console.log(item);
-            console.log(this.shop_cart_all[item].money);
-            let money = this.shop_cart_all[item].money;
-            item_ary.push([item, money]);
-          }
-        }
-
-        if (Indicate == "count") {
-          for (item in this.shop_cart_all) {
-            console.log(item);
-            console.log(this.shop_cart_all[item].money);
-            let count = this.shop_cart_all[item].count;
-            item_ary.push([item, count]);
-          }
-        }
-
-        if (Indicate == "amount") {
-          for (item in this.shop_cart_all) {
-            console.log(item);
-            console.log(this.shop_cart_all[item].money);
-            let money = this.shop_cart_all[item].money;
-            let count = this.shop_cart_all[item].count;
-            item_ary.push([item, money * count]);
-          }
-        }
-
-        // console.log(item_ary);
-
-        // 等做狀態
-        // 1正排序 2反排序 0恢復
-        if (this.sort_status.count == 1) {
-          item_ary.sort((a, b) => a[1] - b[1]);
-        }
-
-        if (this.sort_status.count == 2) {
-          item_ary.sort((a, b) => b[1] - a[1]);
-        }
-
-        if (this.sort_status.count == 0) {
-          this.shop_cart_all = Object.assign({}, this.sort_status.temp_data);
-          return;
-        }
-
-        console.log(item_ary);
-        console.log(this.shop_cart_all);
-        // this.shop_cart_all = item_ary;
-        // 利用item重組 shop_cart_all
-        let obj = {};
-        item_ary.forEach((item) => {
-          console.log(typeof item[0], item[0]);
-          for (itemList_item in this.shop_cart_all) {
-            console.log(typeof itemList_item, itemList_item);
-            if (item[0] == itemList_item) {
-              console.log(this.shop_cart_all[item[0]]);
-              obj[item[0]] = Object.assign({}, this.shop_cart_all[item[0]]);
             }
-          }
-        });
-
-        console.log(obj);
-        this.shop_cart_all = obj;
-      }
-
-      function all_btn_left() {
-        return {
-          GoMain(e) {
-            e.preventDefault();
-            // this.get_shop_cart_lenght();
-            console.log(e, "GoMain");
-            // this.show_page = "main";
-            // window.location = `#main`;
-            window.location = ` `;
-            // window.history.pushState(null, null, `#main`);
-            this.item_num = 1;
-          },
-
-          clearShoppingCart(e) {
-            let isClearShoppingCart = confirm("是否清除購物車");
-            console.log("isClearShoppingCart", isClearShoppingCart);
-            if (isClearShoppingCart) {
-              this.shop_cart_all = {};
-              console.log(this.shop_cart_all);
-              localStorage.setItem("shop_cart_all", this.shop_cart_all);
-            }
-
-            // this.total_money = 0;
-          },
-
-          CheckOut(e) {
-            console.log(this.shop_cart_all);
-            let str = "";
-            let total = 0;
-            Object.keys(this.shop_cart_all).forEach((key) => {
-              let item = this.shop_cart_all[key];
-              console.log(item);
-              str += `您購買 ${key} 數量${item.count}件 `;
-              // 對齊(補空格)
-              str += `金額$${item.count * item.money}元\n`;
-              total += item.count * item.money;
-            });
-
-            str += `總共金額: $${total}元`;
-
-            alert(str);
-          },
         };
-      }
 
-      function del_item() {
-        return {
-          delHandler(key) {
-            this.del_confirm = true;
-            this.del_item_key = key;
-          },
-          confirmDelete(e) {
-            let key = this.del_item_key;
-            console.log(key);
-            delete this.shop_cart_all[key];
-            console.log(this.shop_cart_all);
-
-            localStorage.setItem(
-              "shop_cart_all",
-              JSON.stringify(this.shop_cart_all)
-            );
-            // this.calc_total_money();
-
-            this.del_confirm = false;
-            this.calc_total_money(e);
-          },
-          get_shop_cart_lenght() {
-            let lenghtItemList = Object.keys(this.shop_cart_all).length;
-            console.log(lenghtItemList);
-            this.shop_cart_lenght = lenghtItemList;
-
-            localStorage.setItem("shop_cart_lenght", this.shop_cart_lenght);
-          },
+        let dataObj4 = {
+            dom_show: {
+                item_show: true,
+                del_confirm: false,
+            },
+            data_filter: {
+                filter_status: false,
+            }
         };
-      }
 
-      let vm = new Vue({
-        el: "#app",
-        data: {
-          // 要秀出哪個頁面
-          show_page: "main",
-          // 假資料
-          fetch_data,
 
-          // 單品item頁面
-          cart_item: "",
-          item_num: 1,
 
-          // shop_cart大小購物車
-          shop_cart_all: {},
-          shop_cart_lenght: 0,
-          total_money: 0,
+        let vm1 = new Vue({
+            el: '#app',
+            data: {
+                ...dataObj2,
+                item_page_data: [],
+            },
 
-          // 刪除頁面
-          del_confirm: false,
-          del_item_key: null,
+            methods: {
+                item_page(value) {
+                    console.log(value);
+                    this.status.dom_item_show = 'item';
+                    this.item_page_data = value;
+                },
+                clickHandler(value, key, e) {
+                    // console.log(e);
+                    // console.log(e.target);
+                    // let item = e.target.getAttribute('item');
+                    // let money = e.target.getAttribute('money');
+                    let item = key;
+                    let money = value.money;
+                    console.log(item, money);
 
-          // 購物車的排序
-          sort_status: {
-            temp_data: {},
-            count: 0,
-            Indicate: "",
-            item: "price",
-          },
-          sort_icon: ["", "▲", "▼"],
-        },
-        methods: {
-          ...vue_object(),
-          GoItem(key, value) {
-            // this.show_page = "item";
-            // history.pushState(null, null, "#item");
-            window.location = `#item`;
-            this.cart_item = { key, value };
-            console.log(this.cart_item);
-            localStorage.setItem("item", JSON.stringify({ key, value }));
-          },
-          add_item() {
-            let item = this.cart_item.key;
+                    console.log(typeof item);
+                    if (!this.itemList[item]) {
+                        // 初始化
+                        this.itemList[item] = {};
+                        this.itemList[item].count = 0;
+                        this.itemList[item].money = money;
+                        this.itemList[item].imgsrc = value.imgsrc;
+                    }
+                    this.itemList[item].count += 1;
 
-            let money = this.cart_item.value.money;
-            console.log(item, money);
+                    console.log(this.itemList);
 
-            console.log(typeof item);
-            if (!this.shop_cart_all[item]) {
-              // 初始化(用itme作為判斷)
-              this.shop_cart_all[item] = {};
-              this.shop_cart_all[item].count = 0;
+                    // 
+                    // this.itemList2.push(item);
+                    // 
+                    this.itemList_lenght();
+                    this.calc_total_money();
+                },
+                CheckoutHandler(value, key, e) {
+                    // console.log(e);
+                    this.status.dom_item_show = 'Checkout';
+                    this.clickHandler(value, key, e);
+                    // this.calc_total_money();
+                },
+                CheckoutHandler2(e) {
+                    console.log(this.itemList);
+                    let str = '';
+                    let total = 0;
+                    Object.keys(this.itemList).forEach(key => {
+                        let item = this.itemList[key];
+                        console.log(item);
+                        str += `您購買 ${key} 數量${item.count}件 `;
+                        // 對齊(補空格) 
+                        str += `金額$${item.count * item.money}元\n`;
+                        total += item.count * item.money;
+                    });
 
-              // 同樣要塞到item內的物件
-              this.shop_cart_all[item].money = money;
-              this.shop_cart_all[item].imgsrc = this.cart_item.value.imgsrc;
+                    str += `總共金額: $${total}元`;
+
+                    // alert(str);
+                    let buy_confirm = confirm(str);
+                    console.log(buy_confirm);
+
+                    if (buy_confirm) {
+                        console.log('buy');
+                    } else {
+                        console.log('no buy');
+                    }
+                },
+                clearShoppingCart(e) {
+                    if (confirm('是否要刪除購物車')) {
+                        this.itemList = {};
+                        this.total_money = 0;
+                    } else {
+                        console.log('取消刪除購物車');
+                    }
+                },
+                returnHandler(e) {
+                    this.itemList_lenght();
+                    console.log(e);
+                    this.status.dom_item_show = 'main_page';
+                },
+                handleSub(key) {
+                    console.log(key);
+                    console.log(this.itemList);
+                    if (this.itemList[key].count >= 2) {
+                        this.itemList[key].count -= 1;
+                    }
+                    console.log(this.itemList[key].count);
+                    // this.itemList2;
+                    this.calc_total_money();
+                },
+                handlePlus(key) {
+                    // this.itemList2;
+                    console.log(key);
+                    this.itemList[key].count += 1;
+                    console.log(this.itemList[key].count);
+                    this.calc_total_money();
+                },
+                delHandler(key) {
+                    // this.itemList2;
+                    // if (confirm('是否要刪除')) {
+                    //     console.log(key);
+                    //     delete this.itemList[key];
+                    //     console.log(this.itemList);
+                    //     this.calc_total_money();
+                    // }
+                    this.status.dom_del_confirm = true;
+                    this.del_item_key = key;
+                    // this.confirmHandler(key);
+
+
+                },
+                confirmHandler(e) {
+                    let key = this.del_item_key;
+                    console.log(key);
+                    delete this.itemList[key];
+                    console.log(this.itemList);
+                    // this.calc_total_money();
+
+                    this.status.dom_del_confirm = false;
+                    this.calc_total_money(e);
+
+
+                },
+                itemList_lenght() {
+                    let lenghtItemList = Object.keys(this.itemList).length;
+                    console.log(lenghtItemList);
+                    this.itemList_lenght2 = lenghtItemList;
+                },
+                calc_total_money(e) {
+                    let keys = Object.keys(this.itemList);
+                    console.log(keys);
+                    let total = 0;
+                    keys.forEach(key => {
+                        console.log(key);
+                        let item = this.itemList[key];
+                        let money = item.money;
+                        let count = item.count;
+                        total += money * count;
+
+                    });
+                    console.log(total);
+                    this.total_money = total;
+                    // return total;
+                },
+                money_soft(soft) {
+                    let xxx = this.xxx_api();
+                    xxx.set(222);
+                    console.log(xxx.get());
+
+                    this.btn_false();
+                    console.log(soft);
+                    console.log(this.$refs);
+
+                    Object.keys(this.$refs).forEach(item => {
+                        console.log(this.$refs[item]);
+                        this.$refs[item].classList.remove('active');
+                    });
+
+                    if (soft == 'filter_cancel') {
+                        // status.filter_data=false;
+                        this.$set(this.status, 'filter_data', false);
+
+                        // this.$refs.filter_data.classList.add('active');
+
+                        this.$refs.soft_cancel.classList.add('active');
+                    };
+
+                    if (soft == 'small') {
+                        console.log('if_small');
+                        // this.filter_data=='small';
+                        this.$set(this.status, 'filter_data', 'small');
+
+                        // 
+                        // this.active[1] = true;
+                        // this.$set(this.active,'[1]',true);
+                        let soft_small = this.$refs.soft_small;
+                        console.log(soft_small);
+                        this.$refs.soft_small.classList.add('active');
+
+
+                    }
+
+                    if (soft == 'big') {
+                        console.log('if_big');
+                        // this.filter_data=='big';
+                        this.$set(this.status, 'filter_data', 'big');
+                        this.active[2] = true;
+
+                        this.$refs.soft_big.classList.add('active');
+                    }
+                },
+                soft() {
+                    let data_temp = [];
+                    // 先把所有val都挖出來!?
+                    console.log(this.dataList2);
+
+                    let data_lenght = Object.keys(this.dataList2).length;
+
+                    console.log(this.status.filter_data);
+                    let filter_data = this.status.filter_data;
+                    Object.values(this.dataList2).forEach(function (item, i) {
+                        data_temp.push(item.money);
+                        console.log(item.money, i);
+                        // console.log(this.dataList2[item]);
+                        // let self = this;
+                        // console.log(data_temp);
+
+                        console.log(data_lenght);
+                        if (i == data_lenght - 1) {
+
+                            // console.log(this.status.filter_data);
+
+
+                            if (filter_data == 'small') {
+                                data_temp = data_temp.sort((a, b) => a - b);
+                                console.log(data_temp);
+                            }
+
+
+                            // data_temp = data_temp.sort((a, b) => a - b);
+
+                            if (filter_data == 'big') {
+                                data_temp = data_temp.sort((a, b) => b - a);
+                                console.log(data_temp);
+                            }
+
+
+                        }
+
+
+                    });
+
+                    // 去除相同的值
+                    data_temp = [...new Set(data_temp)];
+                    this.data_temp = data_temp;
+                    // this.$set(this, 'data_temp', data_temp);
+                    console.log(data_temp);
+
+                    console.log(this.data_temp);
+
+
+                    // 重點
+                    let dataList2 = this.dataList2;
+
+                    let dataAll_keys = Object.keys(this.dataList2);
+                    // console.log(dataAll_keys);
+
+                    let dataAll_val = Object.values(this.dataList2);
+                    // console.log(dataAll_val);
+
+                    let money_temp = [];
+
+                    this.data_temp.forEach((money, i) => {
+                        // console.log(money);
+                        dataAll_val.forEach(item => {
+                            if (money == item.money) {
+                                money_temp.push(item);
+                            }
+
+                        });
+                        // console.log(money_temp);
+                    });
+
+                    console.log(money_temp);
+
+
+
+                    let dataAll_obj = {};
+
+                    money_temp.forEach((obj) => {
+                        dataAll_val.forEach((item, i) => {
+                            // console.log(item, i);
+                            let key = dataAll_keys[i];
+
+                            if (obj.money == item.money) {
+                                dataAll_obj[key] = obj;
+                            }
+
+                        });
+                    });
+
+
+
+                    console.log(dataAll_obj);
+                    // this.dataAll_obj = dataAll_obj;
+
+                    return dataAll_obj;
+
+                },
+                btn_false() {
+                    this.active.length = 0;
+                    for (let i = 0; i < 3; i++) {
+                        this.active.push(false);
+
+                    }
+                }
+
+
+
+            },
+            computed: {
+                data_filter() {
+                    console.log('data_filter');
+                    if (this.status.filter_data == false) {
+                        console.log('回傳全部');
+                        return this.dataList2;
+                    }
+
+                    if (this.status.filter_data == 'small') {
+                        console.log('filter_small');
+                        return this.soft();
+
+
+                    }
+
+                    if (this.status.filter_data == 'big') {
+                        console.log('filter_big');
+                        return this.soft();
+
+
+
+                    }
+                }
             }
-
-            // this.shop_cart_all[item].count += 1;
-            this.shop_cart_all[item].count += this.item_num;
-
-            console.log(this.shop_cart_all);
-
-            localStorage.setItem(
-              "shop_cart_all",
-              JSON.stringify(this.shop_cart_all)
-            );
-
-            this.get_shop_cart_lenght();
-            this.calc_total_money();
-          },
-
-          GoCheckout(e, isTrue) {
-            if (isTrue) {
-              this.add_item();
-              this.item_num = 1;
-            }
-            console.log(e);
-
-            // this.show_page = "all";
-            window.location = `#all`;
-            // calc_total_money上面
-            // this.calc_total_money();
-            this.sort_status.temp_data = Object.assign({}, this.shop_cart_all);
-          },
-        },
-      });
-
-      window.onload = function (e) {
-        // console.log(e);
-        // console.log(e);
-        // console.log(e.newURL.split("#")[1]);
-        let Url = location.href;
-        // oldUrl = e.oldURL;
-        id = Url.split("#")[1];
-        console.log(id);
-
-        vm.shop_cart_all = JSON.parse(localStorage.getItem("shop_cart_all"));
-        vm.shop_cart_lenght = JSON.parse(
-          localStorage.getItem("shop_cart_lenght")
-        );
-
-        // vm.total_money;
-        vm.calc_total_money();
-
-        if (id == "main" || id == undefined) {
-          vm.$data.show_page = "main";
-        }
-
-        if (id == "item") {
-          vm.$data.show_page = "item";
-
-          //   let data = JSON.parse(localStorage.getItem("item"));
-          vm.cart_item = JSON.parse(localStorage.getItem("item"));
-        }
-
-        if (id == "all") {
-          vm.$data.show_page = "all";
-        }
-      };
+        })
     </script>
-  </body>
+</body>
+
 </html>
