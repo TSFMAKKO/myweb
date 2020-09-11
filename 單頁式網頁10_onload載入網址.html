@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0px;
+        list-style: none;
+        transition: 0.5s;
+      }
+
+      html,
+      body {
+        scroll-behavior-timing-function: ease-in;
+        scroll-behavior: smooth;
+        scroll-padding-block-start: 100px;
+        transition: 0.5s;
+      }
+
+      .Carousel {
+        width: 100vw;
+        height: 70vh;
+        background: darkgrey;
+      }
+
+      nav {
+        width: 100vw;
+        height: 60px;
+        background: darksalmon;
+        position: sticky;
+        top: -1px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 30px;
+      }
+
+      nav .bar {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        /* width: 200px;*/
+        height: 5px;
+        background: darkgoldenrod;
+        z-index: 5;
+
+        transition: 0.5s;
+      }
+
+      nav .a {
+        /* backdrop-filter: drop-shadow(4px 4px 10px blue); */
+        /* max-width: 1000px; */
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 0 10px;
+        text-decoration: none;
+        color: black;
+        padding: 5px 10px;
+        border-radius: 20px;
+        /* backdrop-filter: drop-shadow(4px 4px 10px blue); */
+      }
+
+      nav a.active {
+        background: cornflowerblue;
+        transform: scale(1.2);
+        font-size: 16px;
+      }
+
+      .search {
+        margin-left: auto;
+        margin-right: 30px;
+        border: 1px solid gray;
+        border-radius: 20px;
+        padding: 2px 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .search:hover {
+        border: 1px solid black;
+        background: white;
+      }
+
+      .search input {
+        outline: none;
+        border: none;
+        background: transparent;
+      }
+
+      .search [type="submit"]:hover {
+        /* background: goldenrod; */
+        /* transform: scale(1.2); */
+        cursor: pointer;
+      }
+
+      main {
+        width: 100vw;
+        /* height: 150vh; */
+        background: cornflowerblue;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .home {
+        width: 80%;
+        height: 80vh;
+        background-color: goldenrod;
+      }
+
+      .menu {
+        width: 80%;
+        height: 80vh;
+        background-color: lightcoral;
+      }
+
+      .about_me {
+        width: 80%;
+        height: 80vh;
+        background-color: burlywood;
+      }
+
+      .call_me {
+        width: 80%;
+        height: 80vh;
+        background-color: darkseagreen;
+      }
+
+      footer {
+        width: 100vw;
+        height: 60px;
+        background: darksalmon;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="Carousel"></div>
+    <nav>
+      <div class="a">
+        <a href="#home">home</a>
+        <a href="#menu">menu</a>
+        <a href="#about_me">about_me</a>
+        <a href="#call_me">call_me</a>
+      </div>
+      <div class="bar"></div>
+      <div class="search">
+        <form action="">
+          <input type="text" />
+          <input type="submit" value="搜尋" />
+        </form>
+      </div>
+    </nav>
+
+    <main>
+      <div class="home" id="home">
+        <p>home</p>
+        <p>123</p>
+        <p>456</p>
+        <p>789</p>
+      </div>
+      <div class="menu" id="menu">
+        <p>menu</p>
+        <p>123</p>
+        <p>456</p>
+        <p>789</p>
+      </div>
+      <div class="about_me" id="about_me">
+        <p>about_me</p>
+        <p>123</p>
+        <p>456</p>
+        <p>789</p>
+      </div>
+      <div class="call_me" id="call_me">
+        <p>call_me</p>
+        <p>123</p>
+        <p>456</p>
+        <p>789</p>
+      </div>
+    </main>
+
+    <footer></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script>
+      let nav_a = Array.from(document.querySelectorAll("nav a"));
+      console.log(nav_a);
+
+      let bar = document.querySelector(".bar");
+      console.log(bar);
+
+      let bodyWidth, nav_a_width, nav_a_left, percentage;
+
+      let div_height = [];
+      //    [513, 1030, 1546, 2064]
+      //    412  929  1446  1951
+
+      let newUrl, oldUrl, id;
+
+      let timer1, timer2, timer3;
+
+      let currentOption;
+
+      function getVal() {
+        bodyWidth = (function () {
+          return document.querySelector("body").clientWidth;
+        })();
+        console.log("bodyWidth", bodyWidth);
+
+        nav_a_width = (function () {
+          let ary = nav_a.map((a) => {
+            //   console.log(a.clientWidth);
+            let width = a.clientWidth;
+
+            //   ary.push(width);
+            return width;
+          });
+
+          return ary;
+        })();
+
+        console.log("nav_a_width", nav_a_width);
+
+        nav_a_left = (function () {
+          let ary = [];
+
+          nav_a.forEach((a) => {
+            //   console.log(a);
+            //   console.log(a.offsetLeft);
+            let Left = a.offsetLeft;
+            ary.push(Left);
+          });
+          return ary;
+        })();
+
+        console.log("nav_a_left", nav_a_left);
+
+        percentage = (function () {
+          let ary = nav_a_left.map((left) => {
+            console.log(left);
+
+            return left / bodyWidth;
+          });
+          return ary;
+        })();
+
+        console.log("percentage", percentage);
+
+        // 拆出去比較好
+        nav_a.forEach((a) => {
+          console.log(a);
+          let target = a.href.split("#")[1];
+          let el = document.getElementById(target);
+          console.log(el.offsetTop);
+          div_height.push(el.offsetTop);
+          if (!currentOption) a.classList.remove("active");
+
+          a.addEventListener("click", function (e) {
+            //
+            window.removeEventListener("scroll", scrollHandler);
+            clearTimeout(timer1);
+
+            console.log(e.target.href.split("#")[1]);
+            let id = e.target.href.split("#")[1];
+            let el = document.getElementById(id);
+
+            let id_i = nav_a_id_index(id);
+            console.log(id_i);
+            barChange(id_i);
+            //   console.log(e.target);
+
+            //   nav_a.forEach((a) => a.classList.remove("active"));
+            if (currentOption) currentOption.classList.remove("active");
+
+            e.target.classList.add("active");
+            currentOption = e.target;
+            e.preventDefault();
+
+            el.scrollIntoView();
+
+            history.pushState(null, null, `#${id}`);
+
+            // setTimeout(() => {
+            //     window.scrollBy(0, -60)
+            // }, 500);
+            //   el.scrollIntoView({ behavior: "smooth", block: "end" });
+            //   history.replaceState({}, "", `${target}`);
+            // history.pushState({}, '', `${target}`);
+
+            timer1 = setTimeout(() => {
+              window.addEventListener("scroll", scrollHandler);
+            }, 1000);
+          });
+
+          //   抓出四個div的高度
+        });
+      }
+
+      function barChange(index) {
+        if (index == "none") {
+          //   bar.style.display='none';
+
+          bar.style.left = `0px`;
+          bar.style.width = `0px`;
+        } else {
+          console.log(nav_a_left);
+          bar.style.left = `${nav_a_left[index]}px`;
+          bar.style.width = `${nav_a_width[index]}px`;
+        }
+      }
+
+      //   barChange(2);
+
+      //   let nav_a_ScrollLeft = (function () {
+      //     let ary = [];
+
+      //     nav_a.forEach((a) => {
+      //       //   console.log(a);
+      //       //   console.log(a.offsetLeft);
+      //       let Left = a.scrollLeft;
+      //       console.log(Left);
+      //       ary.push(Left);
+      //     });
+      //     return ary;
+      //   })();
+
+      //   console.log("nav_a_ScrollLeft", nav_a_ScrollLeft);
+
+      let nav_a_id = (function () {
+        let ary = [];
+        nav_a.forEach((a) => {
+          console.log(a);
+
+          console.log(a.href.split("#")[1]);
+          let item = a.href.split("#")[1];
+          ary.push(item);
+        });
+        return ary;
+      })();
+
+      let nav_a_id_index = function (item) {
+        console.log(nav_a_id);
+
+        let index;
+        nav_a_id.forEach((a_id, i) => {
+          console.log(i);
+          if (a_id == item) {
+            console.log(i);
+            index = i;
+          }
+        });
+
+        return index;
+      };
+
+      //   console.log(nav_a_id_index("home"));
+
+      //   div_height=function(e){
+
+      //   }
+
+      window.addEventListener("resize", function () {
+        console.log("getVal", "resize");
+        getVal();
+        window.removeEventListener("scroll", scrollHandler);
+        setTimeout(() => {
+          window.addEventListener("scroll", scrollHandler);
+        }, 500);
+        //
+      });
+
+      window.addEventListener("scroll", scrollHandler);
+      console.log("getVal");
+      getVal();
+      function scrollHandler(e) {
+        // console.log(e);
+        //   offsetTop  scrollTop   scrollY
+        // console.log(window.scrollY);
+
+        let scrollY = window.scrollY;
+        console.log(scrollY);
+
+        if (scrollY < div_height[0]) {
+          //   nav_a.forEach((a) => a.classList.remove("active"));
+          if (currentOption) currentOption.classList.remove("active");
+          // 第三個參數給空字串(空一格)
+          history.replaceState({}, "", " ");
+
+          barChange("none");
+        }
+
+        if (scrollY >= div_height[0] - 102 && scrollY < div_height[1] - 102) {
+          nav_a.forEach((a) => a.classList.remove("active"));
+          nav_a[0].classList.add("active");
+          currentOption = nav_a[0];
+          history.replaceState({}, "", `#${nav_a_id[0]}`);
+          barChange(0);
+        }
+
+        if (scrollY >= div_height[1] - 102 && scrollY < div_height[2] - 102) {
+          nav_a.forEach((a) => a.classList.remove("active"));
+          nav_a[1].classList.add("active");
+          currentOption = nav_a[1];
+          history.replaceState({}, "", `#${nav_a_id[1]}`);
+          barChange(1);
+        }
+
+        if (scrollY >= div_height[2] - 102 && scrollY < div_height[3] - 102) {
+          nav_a.forEach((a) => a.classList.remove("active"));
+          nav_a[2].classList.add("active");
+          currentOption = nav_a[2];
+          history.replaceState({}, "", `#${nav_a_id[2]}`);
+          barChange(2);
+        }
+
+        if (scrollY >= div_height[3] - 102) {
+          nav_a.forEach((a) => a.classList.remove("active"));
+          nav_a[3].classList.add("active");
+          currentOption = nav_a[3];
+          history.replaceState({}, "", `#${nav_a_id[3]}`);
+          barChange(3);
+        }
+
+        // div_height.forEach((dh, i) => {
+        //   console.log(`height${i}:`, dh - 100);
+        //   if (window.scrollY > dh - 150) {
+        //       nav_a[i].classList.add('active');
+        //   }
+        // });
+      }
+
+      window.addEventListener("hashchange", function (e) {
+        //
+        window.removeEventListener("scroll", scrollHandler);
+        clearTimeout(timer2);
+
+        // 查id名稱和index
+        // 所以預設 網址加上#id會自動id的 dom.scrollIntoView()
+        // 如果用index映射的話  document.querySelectorAll('.父層 .子層')[index].scrollIntoView()
+        // 一樣要解析點擊的a算第幾個index (某個function傳述參數params的回傳值return)
+        console.log(e);
+        console.log(e.newURL.split("#")[1]);
+        newUrl = e.newURL;
+        oldUrl = e.oldURL;
+        id = newUrl.split("#")[1];
+        console.log(id);
+
+        //
+        let a_index = nav_a_id_index(id);
+        console.log(a_index);
+
+        if (!id) barChange("none");
+        else barChange(a_index);
+
+        // nav_a.forEach((a) => a.classList.remove("active"));
+        if (currentOption) currentOption.classList.remove("active");
+
+        nav_a[a_index].classList.add("active");
+        currentOption = nav_a[a_index];
+
+        timer2 = setTimeout(() => {
+          window.addEventListener("scroll", scrollHandler);
+        }, 1000);
+      });
+
+      window.addEventListener("load", function (e) {
+        console.log(e);
+        newUrl = location.href;
+        console.log(newUrl);
+        // oldUrl = e.oldURL;
+        id = newUrl.split("#")[1];
+        console.log(id);
+        //
+        let a_index = nav_a_id_index(id);
+        console.log(a_index);
+
+        if (!id) barChange("none");
+        else barChange(a_index);
+
+        // nav_a.forEach((a) => a.classList.remove("active"));
+        if (currentOption) currentOption.classList.remove("active");
+
+        nav_a[a_index].classList.add("active");
+        currentOption = nav_a[a_index];
+
+        timer2 = setTimeout(() => {
+          window.addEventListener("scroll", scrollHandler);
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
