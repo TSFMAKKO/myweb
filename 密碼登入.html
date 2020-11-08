@@ -51,7 +51,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: 0.2s;
+        transition: 0.5s;
       }
 
       .nums .num.active {
@@ -105,7 +105,7 @@
         console.log("mouseup");
         setTimeout(() => {
           e.target.classList.remove("active");
-        }, 100);
+        }, 200);
       }
 
       function numHandler(e) {
@@ -136,7 +136,7 @@
           console.log("檢查pw");
           setTimeout(() => {
             check_pw();
-          }, 250);
+          }, 550);
 
           //   並清除pw_enter
         }
