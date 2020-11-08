@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+      }
+      .wrap {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .step {
+        /* display: flex;
+        justify-content: center; */
+        position: fixed;
+        width: 40%;
+        left: 50%;
+        top: 20px;
+        transform: translateX(-30%);
+      }
+
+      .step .item {
+        width: 10px;
+        height: 10px;
+        border: 1px solid #aaa;
+        border-radius: 50%;
+        display: inline-block;
+        /* margin: 10px 10px 0; */
+        transition: 0.5s;
+        position: absolute;
+      }
+
+      .step .item:nth-child(1) {
+        /* top: 0px; */
+        left: 0%;
+      }
+
+      .step .item:nth-child(2) {
+        /* top: 0px; */
+        left: 20%;
+      }
+
+      .step .item:nth-child(3) {
+        /* top: 0px; */
+        left: 40%;
+      }
+
+      .step .item:nth-child(4) {
+        /* top: 0px; */
+        left: 60%;
+      }
+
+      .step .item.active {
+        background-color: gray;
+
+        animation-name: oxxo;
+        animation-duration: 0.5s;
+        animation-iteration-count: 1;
+      }
+
+      .step.error {
+        animation-name: oxxo2;
+        animation-duration: 0.5s;
+        animation-iteration-count: 3;
+        
+      }
+
+      /* 一次動畫 */
+      @keyframes oxxo {
+        0% {
+          width: 10px;
+          height: 10px;
+        }
+        50% {
+          width: 12px;
+          height: 12px;
+          transform: translate(-1px, -1px);
+        }
+        100% {
+          width: 10px;
+          height: 10px;
+        }
+      }
+
+      @keyframes oxxo2 {
+        0% {
+          transform: translateX(-30%);
+        }
+        25% {
+          transform: translateX(-50%);
+        }
+        50% {
+          transform: translateX(-30%);
+        }
+        75% {
+          transform: translateX(-10%);
+        }
+        100% {
+          transform: translateX(-30%);
+        }
+      }
+
+      .nums {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: 100vw;
+        margin-top: 30%;
+      }
+
+      .nums .num {
+        width: 20%;
+        height: 20%;
+        border: 1px solid #aaa;
+        margin: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+      }
+
+      .nums .num.active {
+        background: gray;
+      }
+
+      /*  */
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="step">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+      <div class="nums">
+        <div class="num">1</div>
+        <div class="num">2</div>
+        <div class="num">3</div>
+        <div class="num">4</div>
+        <div class="num">5</div>
+        <div class="num">6</div>
+        <div class="num">7</div>
+        <div class="num">8</div>
+        <div class="num">9</div>
+        <div class="num">0</div>
+      </div>
+    </div>
+
+    <script>
+      let password = "1234";
+      let pw_enter = "";
+
+      let nums = Array.from(document.querySelectorAll(".nums .num"));
+      console.log(nums);
+      let step = document.querySelector(".step");
+      let steps = Array.from(document.querySelectorAll(".step .item"));
+      console.log(steps);
+
+      let step_index = 0;
+
+      nums.forEach((num) => {
+        num.addEventListener("mousedown", numHandler);
+        num.addEventListener("mouseup", numHandler_up);
+
+        num.addEventListener("touchstart", numHandler);
+        num.addEventListener("touchend", numHandler_up);
+      });
+
+      function numHandler_up(e) {
+        console.log("mouseup");
+        setTimeout(() => {
+          e.target.classList.remove("active");
+        }, 200);
+      }
+
+      function numHandler(e) {
+        console.log("mousedown");
+        console.log(e);
+        console.log(e.target);
+        let num = e.target.innerHTML;
+        console.log(num);
+        //
+        //   pw_enter.push(num);
+        pw_enter += num;
+        steps[step_index].classList.add("active");
+        step_index += 1;
+
+        e.target.classList.add("active");
+
+        // 數字插入點級特效
+        // e.target.addEventListener('mouseup',function(e){
+        // setTimeout(() => {
+        //   console.log('mouseup');
+        // e.target.classList.remove('active');
+        // }, 200);
+
+        // })
+
+        console.log(pw_enter);
+        if (pw_enter.length == 4) {
+          console.log("檢查pw");
+          setTimeout(() => {
+            check_pw();
+          }, 550);
+
+          //   並清除pw_enter
+        }
+      }
+
+      function check_pw() {
+        if (pw_enter == password) {
+          //   console.log("登入成功");
+          alert("登入成功");
+        } else {
+          //   console.log("登入失敗");
+        //   alert("登入失敗");
+          steps.forEach((step) => {
+            console.log(step);
+            step.classList.remove("active");
+          });
+
+          pw_enter = "";
+          step_index = 0;
+
+          step.classList.add('error');
+          setTimeout(() => {
+            step.classList.remove('error');
+          }, 600);
+        }
+      }
+    </script>
+  </body>
+</html>
