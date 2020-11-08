@@ -96,6 +96,9 @@
       nums.forEach((num) => {
         num.addEventListener("mousedown", numHandler);
         num.addEventListener("mouseup", numHandler_up);
+
+        num.addEventListener("touchstart", numHandler);
+        num.addEventListener("touchend", numHandler_up);
       });
 
       function numHandler_up(e) {
