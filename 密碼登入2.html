@@ -60,31 +60,6 @@
 
       .step .item.active {
         background-color: gray;
-      }
-
-      .nums {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        height: 100vw;
-        margin-top: 100px;
-      }
-
-      .nums .num {
-        width: 20%;
-        height: 20%;
-        border: 1px solid #aaa;
-        margin: 20px;
-        border-radius: 50%;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        transition: 0.5s;
-      }
-
-      .step .item.active {
-        background-color: gray;
 
         animation-name: oxxo;
         animation-duration: 0.5s;
@@ -96,20 +71,45 @@
         0% {
           width: 10px;
           height: 10px;
-          /* top: 0px; */
         }
         50% {
           width: 12px;
           height: 12px;
-          /* top: -1px; */
-          transform: translate(-1px, -1px);
+          transform: translate(-1px,-1px);
         }
         100% {
           width: 10px;
           height: 10px;
-          /* top: 0px; */
         }
       }
+
+      
+
+      .nums {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: 100vw;
+        margin-top: 30%;
+      }
+
+      .nums .num {
+        width: 20%;
+        height: 20%;
+        border: 1px solid #aaa;
+        margin: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+      }
+
+      .nums .num.active {
+        background: gray;
+      }
+
+      /*  */
     </style>
   </head>
   <body>
