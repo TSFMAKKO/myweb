@@ -103,7 +103,9 @@
 
       function numHandler_up(e) {
         console.log("mouseup");
-        e.target.classList.remove("active");
+        setTimeout(() => {
+          e.target.classList.remove("active");
+        }, 100);
       }
 
       function numHandler(e) {
