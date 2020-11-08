@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        user-select: none;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+      }
+
+      @media (min-width: 1000px) {
+        .wrap {
+          width: 100%;
+          height: 100%;
+          border: 1px solid #aaa;
+          position: relative;
+        }
+      }
+
+      @media (min-width: 500px) and (max-width: 999px) {
+        .wrap {
+          width: 100%;
+          height: 100%;
+          border: 1px solid #aaa;
+          position: relative;
+        }
+      }
+
+      @media (max-width: 499px) {
+        .wrap {
+          width: 100%;
+          height: 90%;
+          /* border: 1px solid #aaa; */
+          position: relative;
+          overflow: hidden;
+        }
+      }
+
+      .container {
+        width: 90%;
+        height: 90%;
+        border: 1px solid #aaa;
+        /* box-shadow: x y blur spread color inset; */
+        /* box-shadow: 3px 3px 5px  #cccccc; */
+        box-shadow: 3px 3px 5px 6px #cccccc;
+        /*  */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+
+        border-radius: 10px;
+      }
+
+      .step {
+        display: none;
+        margin: 20px;
+        /* border: 1px solid red; */
+      }
+
+      .step.active {
+        display: block;
+      }
+
+      .nav {
+        position: absolute;
+        bottom: 40px;
+        right: 30px;
+      }
+
+      .nav span {
+        border: 1px solid #aaa;
+        /* margin: 10px; */
+        padding: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+
+        /* box-shadow: 3px 3px 5px  #cccccc; */
+        box-shadow: 3px 3px 1px #cccccc;
+
+        position: relative;
+        left: 0;
+        top: 0;
+        transition: 0.2s;
+      }
+
+      .nav span.active {
+        box-shadow: 0px 0px 0px white;
+        left: 3px;
+        top: 3px;
+      }
+
+      .nav span + span {
+        margin-left: 10px;
+      }
+
+      .nav span.disable {
+        /* opacity: 0.5; */
+        display: none;
+      }
+
+      .nav .confirm {
+        display: none;
+      }
+
+      .progress_bar {
+        height: 20px;
+        background: gray;
+        width: 0%;
+        transition: width 0.5s;
+        /* margin-top: 20px; */
+        /* margin-bottom: 20px; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="container">
+        <p class="progress_bar"></p>
+        <div class="step active">
+          <p>確認產品/確認金額</p>
+        </div>
+        <div class="step">
+          <p>輸入信用卡</p>
+        </div>
+        <div class="step">
+          <p>確認信用卡與金額</p>
+        </div>
+        <div class="step">
+          <p>請稍後</p>
+        </div>
+
+        <div class="nav">
+          <span class="pre disable">上一部</span>
+          <span class="next">下一步</span>
+          <span class="confirm">送出</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script> -->
+    <script>
+      //   let vm = new Vue({
+      //     el: ".wrap",
+      //     data: {},
+      //     methods: {},
+      //   });
+
+      let steps = Array.from(document.querySelectorAll(".step"));
+      console.log(steps);
+      let controls = Array.from(document.querySelectorAll(".nav span"));
+      console.log(controls);
+      //
+
+      let progress_bar = document.querySelector(".progress_bar");
+
+      let confirm = document.querySelector(".nav .confirm");
+      console.log(confirm);
+
+      //   初始化 進度條
+      //   progress_bar.style.width = "25%";
+      setTimeout(() => {
+        progress_bar.style.width = percentage(get_index());
+      }, 0);
+
+      //   console.log(controls[1]);
+      //   setTimeout(() => {
+      //       controls[1].classList.add('active')
+      //   }, 10);
+
+      controls.forEach((control) => {
+        control.addEventListener("click", function (e) {
+          console.log(e);
+          //   console.log("click");
+          // console.log(e.target.getAttribute('class'));
+          let item = e.target.getAttribute("class").split(" ")[0];
+          console.log(item);
+
+          let index = get_index();
+          console.log(index);
+
+          if (item == "pre") {
+            console.log("pre");
+
+            //
+            index -= 1;
+            page(index);
+            nav(index);
+            progress_index(index);
+
+            console.log(controls[0]);
+            setTimeout(() => {
+              controls[0].classList.add("active");
+            }, 0);
+
+            setTimeout(() => {
+              controls[0].classList.remove("active");
+            }, 200);
+          }
+
+          if (item == "next" || item == "confirm") {
+            console.log("next");
+
+            //
+            index += 1;
+
+            // 換頁
+            page(index);
+            nav(index);
+            progress_index(index);
+
+            if (item == "next") {
+              console.log(controls[1]);
+              setTimeout(() => {
+                controls[1].classList.add("active");
+              }, 0);
+
+              setTimeout(() => {
+                controls[1].classList.remove("active");
+              }, 200);
+            }
+
+            if (item == "confirm") {
+              setTimeout(() => {
+                controls[2].classList.add("active");
+              }, 0);
+
+              setTimeout(() => {
+                controls[2].classList.remove("active");
+              }, 200);
+            }
+          }
+        });
+
+        // if (item == "confirm") {
+        //     console.log('confirm');
+        //     // if()
+        // }
+
+        //
+      });
+
+      function progress_index(index) {
+        // progress_bar.style.width = '50%';
+        let per = percentage(index);
+        console.log(per);
+        console.log(progress_bar.style);
+        progress_bar.style.width = per;
+      }
+
+      function percentage(index) {
+        let per = ((index + 1) / steps.length).toFixed(3) * 100 + "%";
+        return per;
+      }
+
+      function page(index) {
+        // 清除舊的
+        let current = get_index();
+        console.log(typeof current);
+        steps[current].classList.remove("active");
+        // steps[current].className='step';
+        // 給新的
+        steps[index].classList.add("active");
+      }
+
+      function nav(index) {
+        let current = get_index();
+        // console.log(controls[current]);
+
+        controls.forEach((control) => {
+          control.classList.remove("disable");
+        });
+
+        if (current == 0) {
+          //
+          controls[0].classList.add("disable");
+        }
+
+        let index_max = steps.length - 2;
+        console.log(index_max);
+        if (current == index_max) {
+          console.log("最長的長度");
+          controls[1].classList.add("disable");
+        }
+
+        if (current == index_max) {
+          confirm.style.display = "inline";
+        } else {
+          confirm.style.display = "none";
+        }
+      }
+
+      function get_index(e) {
+        console.log(e);
+        let index = 0;
+
+        for (let i = 0; i < steps.length; i++) {
+          let active = steps[i].classList[1];
+          console.log(active);
+          if (active) {
+            console.log("return");
+            return index;
+          }
+          index += 1;
+        }
+      }
+
+      confirm.addEventListener("click", function (e) {
+        console.log("confirm");
+        // progress_bar.style.width='100%';
+        let nav = document.querySelector(".nav");
+        nav.style.display = "none";
+        // page('4')
+        //   location.href='後端';
+        let data = { name: "yu", product: { 牙刷: 1, 牙膏: 2 } };
+        getDate(data).then((res) => {
+          steps[3].innerHTML = JSON.stringify(res);
+        });
+      });
+
+      function getDate(data) {
+        console.log("getDate", data);
+        return new Promise((resolve, reject) => {
+          setInterval(() => {
+            resolve(data);
+          }, 2000);
+        });
+      }
+    </script>
+  </body>
+</html>
