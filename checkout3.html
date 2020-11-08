@@ -196,9 +196,9 @@
 
             //
             index -= 1;
-            page(index);
-            nav(index);
-            progress_index(index);
+            // page(index);
+            // nav(index);
+            // progress_index(index);
 
             console.log(controls[0]);
             setTimeout(() => {
@@ -216,13 +216,9 @@
             //
             index += 1;
 
-            // 換頁
-            page(index);
-            nav(index);
-            progress_index(index);
-
             if (item == "next") {
               console.log(controls[1]);
+
               setTimeout(() => {
                 controls[1].classList.add("active");
               }, 0);
@@ -242,6 +238,13 @@
               }, 200);
             }
           }
+
+          setTimeout(() => {
+            // 換頁
+            page(index);
+            nav(index);
+            progress_index(index);
+          }, 200);
         });
 
         // if (item == "confirm") {
@@ -321,7 +324,9 @@
         console.log("confirm");
         // progress_bar.style.width='100%';
         let nav = document.querySelector(".nav");
-        nav.style.display = "none";
+        setTimeout(() => {
+          nav.style.display = "none";
+        }, 200);
         // page('4')
         //   location.href='後端';
         let data = { name: "yu", product: { 牙刷: 1, 牙膏: 2 } };
