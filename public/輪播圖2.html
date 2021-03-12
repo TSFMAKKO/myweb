@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        .demo {
+            width: 600px;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 1200px;
+            border: 1px solid #aaa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .container>img {
+            width: 195px;
+            height: 195px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="demo">
+        <div class="container">
+            <a name="a"></a>
+            <img src="./images/fb-icon-11.png" alt="" srcset="">
+            <a name="b"></a>
+            <img src="./images/fb-icon-11.png" alt="" srcset="">
+            <a name="c"></a>
+            <img src="./images/fb-icon-11.png" alt="" srcset="">
+            <a name="d"></a>
+            <img src="./images/fb-icon-11.png" alt="" srcset="">
+            <a name="e"></a>
+            <img src="./images/fb-icon-11.png" alt="" srcset="">
+            <a name="f"></a>
+            <img src="./images/fb-icon-11.png" alt="" srcset="">
+        </div>
+    </div>
+
+    <script>
+        let array = ['a', 'b', 'c', 'd', 'e', 'f'];
+        let imgs = document.querySelectorAll('img');
+        let href = location.href;
+        let index = 0;
+        console.log(href);
+
+        
+        setInterval(() => {
+            let len = array.length;
+            location.hash = array[index]
+
+            if (index == len - 1) {
+                index = 0
+            } else { index += 1 }
+
+
+
+        }, 1000);
+    </script>
+</body>
+
+</html>
