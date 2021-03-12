@@ -8,14 +8,33 @@
     <title>Document</title>
 
     <style>
-        main {
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
             box-sizing: border-box;
+        }
+
+        .banner {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .banner img {
+            width: 100%;
+            position: relative;
+            top: -150px;
+
+        }
+
+        main {
+            margin-top: 100px;
             display: flex;
             /* justify-content: space-between; */
             justify-content: space-around;
             width: 100%;
             flex-wrap: wrap;
-
+            box-sizing: border-box;
 
         }
 
@@ -24,20 +43,36 @@
         }
 
         .demo:last-child {
-                /* offsetLeft: 100px; */
-                color: blue;
-                position: relative;
-                margin-right: calc(30vw*2 + (10% /2));
-                /* margin-right: 50vw; */
+            /* offsetLeft: 100px; */
+            color: blue;
+            position: relative;
+            margin-right: calc(30vw*2 + (10% /2));
+            /* margin-right: 50vw; */
 
-            }
+        }
 
 
         @media(max-width: 500px) {
+            body{
+                
+            }
+            main {
+                padding: 20px;
+                margin-top: -150px;
+            }
+
+            .banner img {
+                width: 100%;
+                position: relative;
+                top: -0px;
+
+            }
+
             main {
                 flex-direction: column;
                 position: relative;
             }
+
 
             .demo {
                 width: 100%;
@@ -45,13 +80,15 @@
                 /* color: red; */
             }
 
-            
+
 
 
         }
 
         @media(min-width: 501px) and (max-width: 1000px) {
-            main {}
+            main {
+                margin-top: -150px;
+            }
 
             .demo {
                 /* width: 45vw; */
@@ -61,7 +98,7 @@
 
             }
 
-           .demo:last-child{
+            .demo:last-child {
                 margin-right: initial;
             }
 
@@ -70,7 +107,11 @@
 </head>
 
 <body>
-
+    <header>
+        <div class="banner">
+            <img src="./images/高雄車站.jpg" alt="" srcset="">
+        </div>
+    </header>
     <main>
         <div class="demo">
             <h1>物連網</h1>
@@ -101,7 +142,7 @@
 
         </div>
 
-      
+
 
 
     </main>
