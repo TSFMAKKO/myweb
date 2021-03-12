@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        main {
+            box-sizing: border-box;
+            display: flex;
+            /* justify-content: space-between; */
+            justify-content: space-around;
+            width: 100%;
+            flex-wrap: wrap;
+
+
+        }
+
+        .demo {
+            width: 30vw;
+        }
+
+
+        @media(max-width: 500px) {
+            main {
+                flex-direction: column;
+                position: relative;
+            }
+
+            .demo {
+                width: 100%;
+
+                /* color: red; */
+            }
+
+
+        }
+
+        @media(min-width: 501px) and (max-width: 1000px) {
+            main {}
+
+            .demo {
+                /* width: 45vw; */
+                width: 45vw;
+                color: red;
+                /* border: 5px solid #aaa; */
+
+            }
+
+            .demo:nth-child(3n) {
+                /* offsetLeft: 100px; */
+                color: blue;
+                position: relative;
+                margin-right: calc(45vw*1 + (10% /2));
+                /* margin-right: 50vw; */
+
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div class="demo">
+            <h1>物連網</h1>
+            <p>物聯網（英語：Internet of
+                Things，簡稱IoT）是一種計算裝置、機械、數位機器相互關聯的系統，具備通用唯一辨識碼（UID），並具有通過網路傳輸數據的能力，無需人與人、或是人與裝置的互動[1][2][3]。
+
+                物聯網將現實世界數位化，應用範圍十分廣泛。物聯網可拉近分散的資料，統整物與物的數位資訊。物聯網的應用領域主要包括以下方面：運輸和物流、工業製造[4]、健康醫療、智慧型環境（家庭、辦公、工廠）、個人和社會領域等[5]。
+            </p>
+        </div>
+        <div class="demo">
+            <h1>人工智慧</h1>
+            <p>人工智慧（英語：artificial
+                intelligence，縮寫為AI）亦稱智械、機器智慧，指由人製造出來的機器所表現出來的智慧。通常人工智慧是指透過普通電腦程式來呈現人類智慧的技術。該詞也指出研究這樣的智慧系統是否能夠實現，以及如何實現。同時，透過醫學、神經科學、機器人學及統計學等的進步，常態預測則認為人類的很多職業也逐漸被其取代。[1][2]
+            </p>
+        </div>
+        <div class="demo">
+            <h1>影像辨識</h1>
+            <p>視覺影像偵測技術（VID, Video Image
+                Detection）是將影像輸入至分析的儀器中來進行影像分析，尤其廣泛應用在影像監控系統。透過影像分析設定，可以針對入侵者、移動物體、火焰、煙霧等進行特殊事件觸發設定，可以達到即早期預警的效果。</p>
+
+        </div>
+
+
+    </main>
+</body>
+
+</html>
