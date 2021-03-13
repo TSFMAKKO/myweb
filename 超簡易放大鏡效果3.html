@@ -52,18 +52,18 @@
         let rect_height = rect.height;
         // console.log(rect);
 
-        let x = e.offsetX;
-        let y = e.offsetY;
+        let x;
+        let y;
 
         console.log(e.type);
         if (["touchstart", "touchmove", "touchend"].includes(e.type)) {
           // 手機
           // 單點觸控
+          
+          x = e.touches[0].pageX - rect.left;
+          y = e.touches[0].pageY - rect.top;
           // 避免手機滑動 觸發頁面捲動
           e.preventDefault();
-
-          x = e.touches[0].pageX - rect.left;
-          y = e.touches[0].pageY - rect.Top;
         } else {
           // 桌機
           x = e.offsetX;
