@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      :root {
+        /* rem絕對 */
+        font-size: 20px;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* 置中而不會產生卷軸 */
+        min-height: 100vh;
+      }
+
+      h1 {
+        /* 120px */
+        font-size: 6rem;
+        /* 編輯器風格字型 */
+        font-family: monospace;
+        overflow: hidden;
+        width: 1ch;
+
+        /* animation: 2s typing; */
+        /* 分成13個步驟 */
+        animation: 2s typing forwards steps(13, jump-none);
+      }
+
+      @keyframes typing {
+        0% {
+          width: 1ch;
+        }
+        100% {
+          width: 13ch;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CodingStartUp</h1>
+
+    <script>
+      //   let root = document.querySelector(":root");
+      //   console.log(root);
+      //   root.style.setProperty('font-size','10px')
+    </script>
+  </body>
+</html>

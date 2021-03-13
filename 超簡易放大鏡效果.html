@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      #image {
+        width: 300px;
+        height: 300px;
+        background-color: #000;
+        background-image: url(https://placekitten.com/900/900);
+
+        background-size: 300px 300px;
+        background-repeat: no-repeat;
+      }
+
+      #image[zoomed]{
+          background-size: 900px 900px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="image"></div>
+
+    <script>
+      let image = document.getElementById("image");
+      function enterHandler(e) {
+        // 進入先放大 900*900
+        e.target.setAttribute("zoomed", 1);
+      }
+
+      function moveHandler(e) {}
+      function outHandler(e) {
+        // 離開先縮小為300*300
+        e.target.removeAttribute("zoomed");
+      }
+      image.addEventListener("mouseover", enterHandler);
+      image.addEventListener("mousemove", moveHandler);
+      image.addEventListener("mouseout", outHandler);
+    </script>
+  </body>
+</html>

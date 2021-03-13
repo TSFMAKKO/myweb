@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      #image {
+        width: 300px;
+        height: 300px;
+        /* 可以先設定背景 加上size 在載入圖片 */
+        background-color: #000;
+        background-image: url(https://placekitten.com/900/900);
+
+        background-size: 300px 300px;
+        background-repeat: no-repeat;
+        /* background-position: ; */
+      }
+
+      #image[zoomed] {
+        background-size: 900px 900px;
+        background-position: var(--x) var(--y);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="image"></div>
+
+    <script>
+      let image = document.getElementById("image");
+      function enterHandler(e) {
+        // 進入先放大 900*900
+        e.target.setAttribute("zoomed", 1);
+      }
+
+      function moveHandler(e) {
+        let rect = e.target.getBoundingClientRect();
+        // 把舉型的寬/高抓出來 300*300
+        let rect_width = rect.width;
+        let rect_height = rect.height;
+        // console.log(rect);
+        let x = e.offsetX;
+        let y = e.offsetY;
+        console.log(x, y);
+        // 把百分比為給背景的定位
+        let x_percent = String((x / rect_width) * 100) + "%";
+        console.log(x_percent);
+        let y_percent = String((y / rect_height) * 100) + "%";
+
+        // e.target.style.setProperty('background-position',`${x/rect_width}% ${y/rect_height}%`)
+        e.target.style.setProperty("--x", x_percent);
+        e.target.style.setProperty("--y", y_percent);
+      }
+      function outHandler(e) {
+        // 離開先縮小為300*300
+        e.target.removeAttribute("zoomed");
+      }
+      image.addEventListener("mouseover", enterHandler);
+      image.addEventListener("mousemove", moveHandler);
+      image.addEventListener("mouseout", outHandler);
+    </script>
+  </body>
+</html>

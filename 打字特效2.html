@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      :root {
+        /* rem絕對 */
+        font-size: 20px;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* 置中而不會產生卷軸 */
+        min-height: 100vh;
+      }
+
+      h1 {
+        /* 120px */
+        font-size: 6rem;
+        /* 編輯器風格字型 */
+        font-family: monospace;
+
+        /* animation: 2s typing; */
+        /* 分成13個步驟 */
+        /* animation: 2s typing forwards steps(13, jump-none); */
+
+        /* new */
+        position: relative;
+      }
+
+      h1::after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        width: 20px;
+        /* 20*6 */
+        height: 6rem;
+        background-color: #000;
+        border-radius: 2px;
+        right: -30px;
+
+        /* 2個影格 */
+        animation: cursor 1.1s infinite steps(2, jump-none);
+      }
+
+      h1 span {
+        /* 預設inline */
+        display: inline-block;
+        overflow: hidden;
+        width: 0ch;
+        /*  */
+        animation: text-in 0.1s ease-in-out forwards;
+        animation-delay: var(--delay);
+      }
+
+      @keyframes cursor {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes text-in {
+        from {
+          width: 0ch;
+        }
+        to {
+          width: 1ch;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CodingStartUp</h1>
+
+    <script>
+      //   let root = document.querySelector(":root");
+      //   console.log(root);
+      //   root.style.setProperty('font-size','10px')
+
+      const h1 = document.querySelector("h1");
+      h1.innerHTML = h1.textContent.replace(/\S/g, "<span>$&</span>");
+
+      let texts = document.querySelectorAll("h1 span");
+      console.log(texts);
+      //   texts.forEach((text, i) => {
+      //     console.log(text);
+      //     text.style.setProperty("--delay", `${(i * 0.1) + 0}s`);
+      //   });
+
+      //   delay = 0;
+
+      //   texts.forEach((text, i) => {
+      //     delay += 1;
+      //     text.style.setProperty("--delay", `${delay}s`);
+      //   });
+
+      delay = 0;
+
+      texts.forEach((text, i) => {
+        delay += 0.1;
+        text.style.setProperty("--delay", `${delay}s`);
+      });
+    </script>
+  </body>
+</html>

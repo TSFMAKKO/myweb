@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        font-size: 12px;
+      }
+      h1 {
+        font-size: 6rem;
+      }
+      span {
+        /* 預設inline 沒有 padding/margin */
+        display: inline-block;
+        /*  */
+        animation: .4s jump ease-in-out;
+        animation-delay: var(--delay);
+      }
+
+      @keyframes jump {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CodingStartup</h1>
+
+    <button data-animation="jump">JUMP</button>
+    <button data-animation="pop">POP</button>
+    <button data-animation="filp">filp</button>
+    <button data-animation="blink">BLINK</button>
+
+    <script>
+      const h1 = document.querySelector("h1");
+
+      console.log(h1.innerText.replace(/\S/g, "<span>$&<span>"));
+      h1.innerHTML = h1.innerText.replace(/\S/g, "<span>$&</span>");
+
+      document.querySelectorAll("h1 > span").forEach((span, i) => {
+        console.log(span);
+        span.style.setProperty("--delay", `${i * 0.1}s`);
+      });
+    </script>
+  </body>
+</html>
