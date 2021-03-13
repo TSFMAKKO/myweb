@@ -43,7 +43,8 @@
       function enterHandler(e) {
         // 進入先放大 900*900
         e.target.setAttribute("zoomed", 1);
-        moveHandler(e) 
+        // 優化 手機都一定要有移動的動作 才會出發moveHandler
+        moveHandler(e);
       }
 
       function moveHandler(e) {
@@ -60,7 +61,7 @@
         if (["touchstart", "touchmove", "touchend"].includes(e.type)) {
           // 手機
           // 單點觸控
-          
+
           x = e.touches[0].pageX - rect.left;
           y = e.touches[0].pageY - rect.top;
           // 避免手機滑動 觸發頁面捲動
@@ -85,7 +86,8 @@
       function outHandler(e) {
         // 離開先縮小為300*300
         e.target.removeAttribute("zoomed");
-        moveHandler(e) 
+        // 優化 手機都一定要有移動的動作 才會出發moveHandler
+        moveHandler(e);
       }
       image.addEventListener("mouseover", enterHandler);
       image.addEventListener("mousemove", moveHandler);
