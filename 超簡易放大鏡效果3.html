@@ -43,6 +43,7 @@
       function enterHandler(e) {
         // 進入先放大 900*900
         e.target.setAttribute("zoomed", 1);
+        moveHandler(e) 
       }
 
       function moveHandler(e) {
@@ -84,6 +85,7 @@
       function outHandler(e) {
         // 離開先縮小為300*300
         e.target.removeAttribute("zoomed");
+        moveHandler(e) 
       }
       image.addEventListener("mouseover", enterHandler);
       image.addEventListener("mousemove", moveHandler);
