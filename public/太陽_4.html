@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: white;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .sunshine_system {
+        border: 1px solid red;
+        width: 300px;
+        height: 300px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        animation: Spin1 infinite linear 6s;
+      }
+
+      @keyframes Spin1 {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      
+      @keyframes Spin2 {
+        0% {
+          transform: rotate(360deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+
+      .sunshine_system .sum {
+        border: 1px solid red;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+      }
+
+      .sunshine_system .earth_group {
+        /* border: 1px solid red; */
+        /* position: absolute; */
+        width: 200px;
+        height: 200px;
+        /* margin: auto; */
+        border-radius: 50%;
+        position: relative;
+        border: transparent;
+        /* border: 5px solid black;
+        box-sizing: content-box; */
+      
+      }
+
+      .earth_shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        z-index: 5;
+        /* transform: translate(-1%,-1%); */
+        /* border: 1px solid gray; */
+        border: transparent;
+        border-radius: 50%;
+        overflow: hidden;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.8) 30%,
+          rgba(0, 0, 0, 1) 50%
+        );
+      }
+
+      .earth_img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /* height: 100%; */
+        /* border: 1px solid gray; */
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid black;
+        /* margin: auto; */
+          animation: 10s infinite linear Spin2;
+      }
+
+      .earth_img img {
+        width: 100%;
+        display: block;
+        overflow: hidden;
+        z-index: -2;
+        border: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sunshine_system">
+      <!-- sunshine_system -->
+      <div class="sum">sum</div>
+      <div class="earth_group">
+        <div class="earth_shadow">earth_shadow</div>
+        <div class="earth_light">earth_light</div>
+        <div class="earth_img">
+          <img src="./images/earth.jpg" alt="" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
