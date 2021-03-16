@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: black;
+        }
+
+        .sum {
+            width: 50px;
+            height: 50px;
+            /* border: 1px solid red; */
+            background-color: white;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            border-radius: 50%;
+            box-shadow: 0 0 60px 10px cornflowerblue;
+            z-index: 2;
+        }
+
+        .earth {
+            width: 200px;
+            height: 200px;
+            /* border: 1px solid cornflowerblue; */
+            border-top: 1px solid cornflowerblue;
+            border-left: 1px solid cornflowerblue;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            box-shadow: -2px -2px 5px 1px cornflowerblue;
+            /* z-index: 5; */
+            background-color: black;
+        }
+
+        .all {
+            /* border: 1px solid red; */
+            position: relative;
+            width: 300px;
+            height: 300px;
+            animation: test infinite 2s linear;
+
+        }
+
+        @keyframes test {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+        <div class="all">
+            <div class="sum"></div>
+            <div class="earth"></div>
+        </div>
+
+
+    <script>
+
+    </script>
+</body>
+
+</html>

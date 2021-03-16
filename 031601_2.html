@@ -61,7 +61,7 @@
             /* flex-grow： 0
                flex-shrink： 1
                flex-basis： 200px */
-            min-width: 300px;
+               min-width: 300px;
             min-height: 70vh;
             background-color: teal;
             display: flex;
@@ -95,64 +95,6 @@
             font-size: 20px;
 
         }
-
-        @media screen and (max-width: 768px) {
-            .main {
-                /* flex-direction: column; */
-                flex-direction: row;
-                flex-wrap: wrap;
-
-            }
-
-            .aside {
-                overflow: hidden;
-                min-width: 100%;
-                /* height: 20vh; */
-                /* max-height: 300px; */
-                /* min-height: 300px; */
-                /* display: none; */
-                /* max-height: 150px; */
-                /* height: 150px; */
-                /* flex-basis: 100%; */
-
-                /* display: flex;
-                justify-content: center;
-                align-items: center; */
-                flex-direction: row;
-                flex-wrap: wrap;
-                /* max-height: 10%; */
-                /* flex: 0 1 200px; */
-
-                /* max-height: 100px; */
-                /* height: 100px; */
-                min-height: 100px;
-            }
-
-            .aside1,
-            .aside2 {
-                height: 10%;
-                color: red;
-                width: 100%;
-                /* height: 5em; */
-                /* max-height: 50px; */
-                /* height: 50px; */
-                min-height: 50px;
-            }
-
-            .aside1.active,
-            .aside2.active,
-            .aside1.active {
-                min-width: auto;
-            }
-
-            .aside1 {
-                /* height: 10vh; */
-            }
-
-            .articale {
-                /* flex: 1 1 auto ; */
-            }
-        }
     </style>
 </head>
 
@@ -165,8 +107,8 @@
         <div class="header"></div>
 
         <div class="main">
-            <div class="aside active">
-                <div class="aside1 active">aside1</div>
+            <div class="aside">
+                <div class="aside1">aside1</div>
                 <div class="aside2">aside2</div>
             </div>
 
@@ -178,18 +120,7 @@
     </main>
 
     <script>
-        let aside = document.querySelector('.aside');
-        let aside1 = document.querySelector('.aside1');
-        let aside2 = document.querySelector('.aside2');
 
-        function asideHandler(e) {
-            console.log('click');
-            e.target.classList.add('active');
-            aside.classList.add('active');
-        }
-
-        aside1.addEventListener('click', asideHandler)
-        aside2.addEventListener('click', asideHandler)
     </script>
 </body>
 
