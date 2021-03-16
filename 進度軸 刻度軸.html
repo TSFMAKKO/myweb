@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        input[type="range"] {
+            width: 200px;
+            height: 50px;
+        }
+
+        progress {
+            width: 200px;
+            height: 50px;
+            /* appearance: none; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <input type="range" value="50" min="1" max="100" id="range">
+
+    <br>
+    <progress value="50" min="1" max="100" id="progress"></progress>
+
+    <script>
+        let range = document.getElementById('range');
+        console.log(range);
+        let progress = document.getElementById('progress');
+
+        range.addEventListener('change', function (e) {
+            console.log(e.target.value);
+            console.log(e.target);
+        })
+
+        // progress.addEventListener('change', function (e) {
+        //     console.log(e.target.value);
+        //     console.log(e.target);
+        // })
+
+        let flag = false;
+
+        progress.addEventListener('mousedown', function (e) {
+            flag = true
+        })
+
+        progress.addEventListener('mouseup', function (e) {
+            flag = false
+        })
+
+        progress.addEventListener('mousemove', function (e) {
+            if (flag) {
+                console.log(e.target);
+                console.log(e.offsetX);
+
+                console.log(e.target.style.width);
+                let percent = (e.offsetX / 200) * 100 + '%';
+                console.log(percent);
+
+                e.target.value = (e.offsetX / 200) * 100;
+            }
+
+        })
+
+        function percentTo256(num) {
+            console.log(num);
+            // 先*2.56
+            // 0~255轉00~FF
+            // 先/16 取整數 
+            // 把10~15 轉成 A~F
+
+            let new_num = '';
+            // 取餘數 %
+
+            let big = Math.ceil(num / 16);
+            console.log(big);
+            let big_str = percent16toF(big);
+            console.log(big_str);
+
+            let small_str = (num % 16) + 1;
+            console.log(small_str);
+            small_str = percent16toF(small_str);
+            console.log(small_str);
+
+            new_num = big_str + small_str;
+
+
+
+            return new_num;
+
+        }
+
+        function percent16toF(num2) {
+            let num_new_big = 0;
+
+            if (num2 == 16) {
+                num_new_big = 'f';
+            } else if (num2 == 15) {
+                num_new_big = 'e';
+            } else if (num2 == 14) {
+                num_new_big = 'd';
+            }
+            else if (num2 == 13) {
+                num_new_big = 'c';
+            }
+            else if (num2 == 12) {
+                num_new_big = 'b';
+            }
+            else if (num2 == 11) {
+                num_new_big = 'a';
+            }
+
+            return num_new_big;
+
+        }
+
+        console.log(percent16toF(16));
+        console.log(percentTo256(255));
+
+    </script>
+</body>
+
+</html>
