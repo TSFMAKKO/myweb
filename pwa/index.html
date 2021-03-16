@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="This is a PWA called helloworld" />
+    <meta name="keywords" content="pwa" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="author" content="" />
+    <meta name="copyright" content="" />
+    <meta name="robots" content="follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="helloworld" />
+    <meta property="og:url" content="" />
+    <meta property="og:image:secure_url" itemprop="image" content="" />
+    <meta property="og:image" itemprop="image" content="" />
+    <meta property="og:image:width" content="700" />
+    <meta property="og:image:height" content="700" />
+    <meta property="og:image:alt" content="OG image of helloworld" />
+    <meta property="og:description" content="This is a PWA called helloworld" />
+    <meta property="og:site_name" content="helloworld" />
+    <meta name="fragment" content="!" />
+    <link rel="icon" sizes="192x192" href="assets/logo-192.png" />
+    <meta name="theme-color" content="#0099ff" />
+    <title>helloworld</title>
+    <link rel="manifest" href="manifest.json" />
+    <style>
+      :root {
+        --theme: #0099ff;
+      }
+      a {
+        text-decoration: none;
+        color: var(--theme);
+      }
+    </style>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: white;
+        user-select: none;
+        overflow: hidden;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .sunshine_system {
+        /* border: 1px solid red; */
+        width: 300px;
+        height: 300px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        animation: Spin1 infinite linear 60s;
+      }
+
+      @keyframes Spin1 {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes Spin2 {
+        0% {
+          transform: rotate(360deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+
+      .sunshine_system .sum {
+        /* border: 1px solid red; */
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 40px 10px;
+        border: transparent 3px solid;
+        outline: transparent;
+      }
+
+      .sunshine_system .earth_group {
+        /* border: 1px solid red; */
+        /* position: absolute; */
+        width: 200px;
+        height: 200px;
+        /* margin: auto; */
+        border-radius: 50%;
+        position: relative;
+        border: transparent;
+        /* border: 5px solid black;
+        box-sizing: content-box; */
+      }
+
+      .earth_shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        z-index: 5;
+        /* transform: translate(-1%,-1%); */
+        /* border: 1px solid gray; */
+        border: transparent;
+        border-radius: 50%;
+        overflow: hidden;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.01) 0%,
+          rgba(0, 0, 0, 0.5) 10%,
+          rgba(0, 0, 0, 0.8) 30%,
+          rgba(0, 0, 0, 1) 100%
+        );
+      }
+
+      .earth_img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /* height: 100%; */
+        /* border: 1px solid gray; */
+        border-radius: 50%;
+        overflow: hidden;
+        border: 0.5px solid transparent;
+        /* margin: auto; */
+        animation: 30s infinite linear Spin2;
+      }
+
+      .earth_img img {
+        width: 100%;
+        display: block;
+        overflow: hidden;
+        z-index: -2;
+        border: transparent;
+      }
+
+      .earth_light {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        box-shadow: -2px -2px 3px 1px cornflowerblue;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+  
+
+    <script>
+      // ServiceWorker Registration
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("sw.js").then(
+            function (registration) {
+              // Registration was successful
+              console.log(
+                "ServiceWorker registration successful with scope: ",
+                registration.scope
+              );
+            },
+            function (err) {
+              // registration failed :(
+              console.log("ServiceWorker registration failed: ", err);
+            }
+          );
+        });
+      }
+    </script>
+
+    <div class="sunshine_system" id="sunshine_system">
+      <!-- sunshine_system -->
+      <div class="sum"></div>
+      <div class="earth_group">
+        <div class="earth_shadow"></div>
+        <div class="earth_light"></div>
+        <div class="earth_img">
+          <img src="./images/earth.jpg" alt="" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
