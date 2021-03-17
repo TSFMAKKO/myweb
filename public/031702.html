@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        select {
+            padding: 8px 12px;
+            color: #333333;
+            background-color: #cccccc;
+            border: 1px solid #dddddd;
+            cursor: pointer;
+            border-radius: 5px;
+
+            /* 取消右邊箭頭 */
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+
+            /* 關鍵 */
+            font-size: 20px;
+        }
+
+        select:focus,
+        select:hover {
+            outline: none;
+            border: 1px solid #bbbbbb;
+
+        }
+
+        option {
+            /* 沒設定顏色會繼承 select設定的背景色 */
+            /* background-color: white; */
+            padding: 5px;
+            /* 設定block沒用 */
+            display: block;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <fieldset>
+        <table border="5 solid">
+            <caption>標題</caption>
+
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <select name="" id="">
+        <option value="" disabled>disable</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+
+
+
+</body>
+
+</html>

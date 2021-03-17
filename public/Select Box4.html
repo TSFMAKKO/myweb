@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" /> -->
+    <link rel="stylesheet" href="./fontawesome-free-5.15.2-web/css/all.css">
+    <style>
+        body {
+            margin: 0;
+            bottom: 0;
+            background-color: #004882;
+        }
+
+        /* select的父層 */
+        .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            
+            /*  */
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            overflow: hidden;
+        }
+
+        /* 右邊按鈕 */
+        .box::before {
+            /* font awesome */
+            /* content: '\f063'; */
+            content: '\f358';
+            font-family: "Font Awesome 5 Free";
+            font-size: 25px;
+            /* 文字(圖片)水平/垂直置中 */
+            text-align: center;
+            line-height: 50px;
+            color: white;
+
+            /* dom穿透(點擊事件 取消) */
+            pointer-events: none;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background: #007ce0;
+        }
+
+        .box:hover::before {
+            /* background: #0472ca; */
+        }
+
+        /* select 本體 */
+        .select1 {
+            appearance: none;
+            /* -webkit-appearance: button; */
+            outline: none;
+
+            padding: 8px 12px;
+            background-color: #0563af;
+            color: #fff;
+            padding: 10px;
+            width: 250px;
+            height: 50px;
+            border: none;
+
+            font-size: 20px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, .5);
+
+
+        }
+
+        .select1 option {
+            /* 會繼承父層select的 字體大小 */
+            /* font-size: 30px; */
+            /* list-style: url(images/earth_PNG8.png); */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <select name="" id="" class="select1">
+            <option value="" disabled>disable</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+
+</body>
+
+</html>

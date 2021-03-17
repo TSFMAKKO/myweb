@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .sum {
+            width: 100px;
+            height: 100px;
+            background: cornflowerblue;
+            filter: blur(5px);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sum"></div>
+
+    
+
+    <script>
+        function oneTo100() {
+            let num = 0;
+            for (let i = 1; i <= 100; i++) {
+                num += i;
+            }
+            // console.log(num);
+            return num;
+        }
+        console.log(oneTo100());
+
+        let even_zeroTo100 = function () {
+            let num = 0;
+            for (let i = 0; i <= 100; i += 2) {
+                num += i;
+            }
+            // console.log(num);
+            return num;
+        }
+
+        console.log(even_zeroTo100());
+
+        even_zeroTo100();
+
+        let odd_oneTo100 = function() {
+            let num = 0;
+            for (let i = 1; i < 100; i += 2) {
+                num += i;
+                // console.log(i);
+            }
+            // console.log(num);
+            return num
+        }()
+
+        console.log(odd_oneTo100);
+
+    </script>
+</body>
+
+</html>
