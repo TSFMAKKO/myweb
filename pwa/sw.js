@@ -2,7 +2,7 @@ var CACHE_NAME = 'version-1'; // bump this version when you make changes.
 // Put all your urls that you want to cache in this array
 var urlsToCache = [
     'index.html',
-    'assets/logo-192.png'
+    'assets/logo-192.jpg'
 ];
 
 // Install the service worker and open the cache and add files mentioned in array to cache
