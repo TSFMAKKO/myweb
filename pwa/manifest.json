@@ -1,21 +1,24 @@
 {
-    "name": "YuChin的地球",
-    "short_name": "Y.C_earth",
-    "icons": [
-        {
-            "src": "assets/logo-192.jpg",
-            "sizes": "192x192",
-            "type": "image/jpg"
-        },
-        {
-            "src": "assets/logo-512.jpg",
-            "sizes": "512x512",
-            "type": "image/jpg"
-        }
-    ],
-    "theme_color": "#6C6C6C",
-    "background_color": "#6C6C6C",
-    "display": "standalone",
-    
-    "start_url":"index.html"
+  "name": "YuChin的地球",
+  "short_name": "Y.C_earth",
+  "icons": [
+    {
+      "src": "assets/logo-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    },
+    {
+      "src": "assets/logo-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ],
+  "theme_color": "#000",
+  "background_color": "#000",
+  "display": "standalone",
+
+  "start_url": "index.html"
 }
+
+//  "theme_color": "#6C6C6C",
+// "background_color": "#6C6C6C",
