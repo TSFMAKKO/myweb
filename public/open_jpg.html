@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <img src="" width="100px" height="100px" onclick="swipe();" id="largeImage" />
+    <script>
+        function swipe() {
+            var largeImage = document.getElementById('largeImage');
+            largeImage.style.display = 'block';
+            largeImage.style.width = 200 + "px";
+            largeImage.style.height = 200 + "px";
+            var url = largeImage.getAttribute('src');
+            url = "./images/高雄車站.jpg";
+            window.open(url, 'Image', 'width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
+        }
+
+        function largeImage() {
+            open("./images/高雄車站.jpg", 'image1', "top=300, left=300, width=500, height=300")
+        }
+    </script>
+
+
+    <a href="javascript:void" onclick="largeImage()">開啟圖片</a>
+
+
+</body>
+
+</html>

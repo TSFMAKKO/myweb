@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <table>
+        <tbody>
+            <tr>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="javescript:void" onclick="test()">刪除</a>
+    <a href="javescript:void" onclick="modify()">修改</a>
+    <p class="ans">12345</p>
+    <script>
+        // 刪除函數
+        function test() {
+            console.log('刪除');
+            // 是否要刪除
+            let ans = confirm('是否要刪除')
+
+            if (ans) {
+                document.querySelector('.ans').innerHTML = '已刪除成功'
+            } else {
+                document.querySelector('.ans').innerHTML = '尚未刪除'
+            }
+        }
+
+
+        // 修改視窗
+        function modify() {
+            console.log('修改視窗');
+            let ans = confirm('是否要修改');
+            let ans_dom = document.querySelector('.ans');
+            if (ans) {
+                let val = prompt('請輸入要修改的值' ,ans_dom.innerHTML);
+                ans_dom.innerHTML = val;
+            }
+        }
+    </script>
+</body>
+
+</html>

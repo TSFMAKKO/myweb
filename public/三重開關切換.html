@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <input type="button" value="開啟" id="btn1">
+    <script>
+        let btn1 = document.querySelector('#btn1');
+        console.log(btn1);
+
+        let parse = false;
+        let parse_id;
+        btn1.addEventListener('click', function (e) {
+
+            if (!parse) {
+                // open();
+                // parse = !parse;
+                // console.log(parse);
+            } else {
+                // clearInterval(parse_id);
+                // close();
+                // parse = !parse;
+                // console.log(parse);
+            }
+
+
+
+            console.log('btn1', e.target.value, e);
+            let btn_val = e.target.value;
+            if (btn_val == '開啟') {
+                btn1.value = '開啟1';
+            } else if (btn_val == '開啟1') {
+                btn1.value = '開啟2';
+            } else if (btn_val == '開啟2') {
+                btn1.value = '開啟3';
+            } else if (btn_val == '開啟3') {
+                btn1.value = '關閉';
+            } else {
+                btn1.value = '開啟';
+            }
+
+            // parse = !parse;
+
+        });
+
+        function open() {
+            parse_id = setInterval(() => {
+                btn1.dispatchEvent(new MouseEvent('click'));
+                // btn1.click();
+            }, 500);
+        }
+
+        function close() {
+            clearInterval(parse_id);
+        }
+    </script>
+</body>
+
+</html>

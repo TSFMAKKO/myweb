@@ -1,0 +1,19 @@
+.nav {
+  background: #ccc;
+}
+
+.nav li {
+  display: inline;
+}
+
+.nav li a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: #000;
+}
+
+.nav li img {
+  width: 100%;
+}
+/*# sourceMappingURL=my_sass.css.map */

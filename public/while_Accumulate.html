@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+        let i = 0;
+        let num = 0;
+        while (i <= 100) {
+            num += i;
+            i += 1;
+        }
+        console.log(num);
+
+
+        i = 0;
+        num = 0;
+        while (i <= 100) {
+            num += i;
+            i += 2;
+        }
+        console.log(num);
+
+
+        i = 1;
+        num = 0;
+        while (i <= 100) {
+            num += i;
+            i += 2;
+        }
+        console.log(num);
+
+
+        i = 0;
+        num = 0;
+        do {
+            num += i
+            // 記得加上 i++
+            i+=1;
+        } while (i <= 10) {
+            // 條件成立跳出迴圈後執行的區塊
+            console.log(num);
+            document.write(num)
+        };
+
+    </script>
+</body>
+
+</html>
