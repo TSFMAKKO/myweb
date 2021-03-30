@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            /* margin: 0;
+            padding: 0; */
+            box-sizing: border-box;
+
+        }
+
+        #img_group,
+        .big1 {
+            width: 700px;
+        }
+
+        #img_group img {
+            width: 100px;
+            height: 100px;
+            margin: 5px 10px;
+            filter: blur(5px);
+            transition: .5s;
+            border-radius: 25px;
+        }
+
+        #img_group img:hover {
+            filter: blur(0);
+            /* transform: scale(1.1); */
+            border-radius: 0px;
+            border-radius: 25px;
+        }
+
+        #img_group img:active{
+            transform: scale(0.8);
+        }
+
+
+
+        img {
+            width: 100%;
+        }
+
+        .big1 {
+            position: fixed;
+            /* width: 100vw;
+            height: 100vh; */
+            width: 100px;
+            transform: translate(-10px, 0);
+            /* top: 200px; */
+            /* left: 8px; */
+            z-index: 5;
+            /* filter: blur(5px); */
+            /* left: var(--left); */
+            /* top: var(--top); */
+
+            /* left: 25%;
+            top: 25%; */
+            transition: .5s;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .big1.active {
+            position: fixed;
+            width: 700px;
+            transition: .5s;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            /* filter: blur(0); */
+            border-radius: 0px;
+        }
+
+        .grey {
+            position: fixed;
+            /* content: ''; */
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .5);
+            /* filter: blur(5px); */
+            display: block;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: none;
+            /* opacity: 0; */
+            transition: .5s;
+        }
+
+        .grey.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="img_group">
+        <!-- <img src="./images/高雄車站.jpg" alt="" srcset="">
+        <img src="./images/高雄車站.jpg" alt="" srcset="">
+        <img src="./images/高雄車站.jpg" alt="" srcset="">
+        <img src="./images/高雄車站.jpg" alt="" srcset="">
+        <img src="./images/高雄車站.jpg" alt="" srcset="">
+        <img src="./images/高雄車站.jpg" alt="" srcset=""> -->
+
+
+    </div>
+
+    <div id="tab">
+
+    </div>
+
+    <div class="big1">
+        <!-- <img src="./images/高雄車站.jpg" alt="" srcset=""> -->
+
+    </div>
+    <div class="grey"></div>
+    <script>
+        let grey = document.querySelector('.grey');
+        let img_address = {};
+        // 把圖片位子塞給array
+        let img_src_all = [];
+        for (let i = 0; i < 33; i++) {
+            // img_src_all.push(`./images/高雄車站${i + 1}.jpg`);
+            img_src_all[i] = `./images/高雄車站${i + 1}.jpg`;
+        }
+
+        console.log(img_src_all);
+
+
+        // 產生page超連結
+        let tab_len = Math.ceil(img_src_all.length / 6);
+        console.log(tab_len);
+
+        let html = '';
+
+        for (let i = 0; i < tab_len; i++) {
+            html += `<a href="javascript:void(0)" id="${i}" onclick="change_pic(this.id)">${i + 1}</a>  `;
+            let a = document.createElement('a');
+            a.href = "javascript:void";
+            a.id = `${i}`;
+            a.onclick = "change_pic(this.id)";
+            a.innerHTML = `${i + 1} `;
+            console.log(a);
+            // tab.appendChild(a);
+        }
+        // console.log(html);
+        tab.innerHTML += html;
+
+
+
+        // 改變圖片
+        function change_pic(index) {
+            let html = '';
+            // index=0; 0~5(+5的意思)
+
+            for (let i = index * 6; i < index * 6 + 6; i++) {
+                if (typeof img_src_all[i] !== 'undefined') {
+                    html += `<img src="${img_src_all[i]}" onclick="tobig('${img_src_all[i]}',event)">`
+
+                }
+            }
+            console.log(html);
+            img_group.innerHTML = html;
+        }
+
+
+
+        document.querySelectorAll('#tab a')[0].click();
+
+        let big1 = document.querySelector('.big1');
+
+        console.log(big1);
+        function tobig(path, e) {
+            // big1
+            console.log(path);
+            console.log(big1);
+            big1.innerHTML = `<img src="${path}">`;
+
+            // 抓dom距離視窗的位子
+            console.log(e.target);
+
+            let top = e.target.getBoundingClientRect().top;
+            let left = e.target.getBoundingClientRect().left;
+            console.log(top, left, typeof top);
+
+            // big1.style.top = `${top}px !important`;
+            // big1.style.left = `${left}px !important`;
+            big1.style.setProperty('left', `${left}px`);
+
+            big1.style.setProperty('top', `${top}px`);
+
+            setTimeout(() => {
+                grey.style.display = 'block';
+                big1.style.display = 'block';
+            }, 30);
+
+
+            // grey.style.setProperty('display', 'block');
+            // grey.style.setProperty('opacity', '1');
+            // grey.classList.add('active');
+            setTimeout(() => {
+                big1.classList.add('active');
+
+            }, 50);
+            // big1.style.top = '50%';
+            // big1.style.left = '50%';
+
+            // img_address.top = top;
+            // img_address.left = left;
+            // console.log(img_address);
+
+
+        }
+
+
+        grey.addEventListener('click', function (e) {
+            big1.classList.remove('active');
+            grey.style.display = 'none';
+
+            setTimeout(() => {
+                big1.style.display = 'none';
+
+            }, 400);
+        })
+    </script>
+</body>
+
+</html>

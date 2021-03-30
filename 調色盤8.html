@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .color {
+        width: 300px;
+        height: 300px;
+        background-color: black;
+        border-radius: 20px;
+      }
+
+      p [type="text"] {
+        width: 100px;
+        height: 16px;
+      }
+
+      [type="range"] {
+        /* margin-top: 10px; */
+        /* position: relative;
+          top: 10px; */
+      }
+
+      [type="text"] {
+        width: 25px;
+        height: 10px;
+        position: relative;
+        top: -3px;
+        /* margin-top: 0; */
+        /* display: inline-block; */
+      }
+    </style>
+  </head>
+  <body>
+    <input type="hidden" name="" />
+
+    <!-- <input type="url" name="" id=""> -->
+    <div class="color"></div>
+
+    <div class="range">
+      <!-- <div> -->
+      R<input type="range" name="red" id="" min="0" max="255" value="0" />
+      <input type="text" id="red_val" />
+      <!-- <span id="red_val"></span> -->
+      <!-- </div> -->
+
+      <br />
+      G<input type="range" name="green" id="" min="0" max="255" value="0" />
+      <input type="text" id="green_val" />
+      <br />
+      B<input type="range" name="blue" id="" min="0" max="255" value="0" />
+      <input type="text" id="blue_val" />
+      <br />
+      O<input type="range" name="op" id="" min="0" max="100" value="100" />
+      <input type="text" id="op_val" value="1" />
+      <br />
+    </div>
+
+    <p>
+      16進位<input
+        type="text"
+        name="hex"
+        id="hex"
+        onchange="hex_change(this.value)"
+      />
+      RGBA<input type="text" name="rgba" id="rgba" />
+    </p>
+
+    <script>
+      //
+      let colors = Array.from(document.querySelectorAll('[type="range"]'));
+      console.log(colors);
+      let vals = Array.from(document.querySelectorAll('.range [type="text"]'));
+
+      let color_dom = document.querySelector(".color");
+
+      let color_click = false;
+      let color_array = ["00", "00", "00", 1];
+
+      //事件代理
+      //   color_array = new Proxy(color_array, {
+      //     get() {},
+      //     set(targetObj, prop, value) {
+      //       console.log(targetObj, prop, value);
+      //       // 如果一切正常, 則正常給值
+      //       targetObj[prop] = value;
+      //       return true;
+      //     },
+      //   });
+
+      for (let i = 0; i < vals.length; i++) {
+        vals[i].addEventListener("change", function (e) {
+          console.log(e.target.value, e.target.id);
+          let id = e.target.id;
+          let val = e.target.value;
+          if (id == "red_val") {
+            color_array[0] = val;
+            colors[0].value = val;
+          }
+
+          if (id == "green_val") {
+            color_array[1] = val;
+            colors[1].value = val;
+          }
+
+          if (id == "blue_val") {
+            color_array[2] = val;
+            colors[2].value = val;
+          }
+
+          // 更改顏色
+          change_color();
+        });
+      }
+
+      for (let i = 0; i < colors.length; i++) {
+        colors[i].addEventListener("mousedown", function (e) {
+          color_click = true;
+          //
+        });
+
+        colors[i].addEventListener("mousemove", function (e) {
+          if (color_click) {
+            console.log("click", e.target, e.target.value);
+            // 判斷是哪個拉感，把值丟進去color_array(R,G,B)
+            // console.log(e.target.getAttribute('name'));
+            let name = e.target.getAttribute("name");
+            let value = parseInt(e.target.value);
+            console.log(value);
+            // value = ten_to_hex(value);
+            // console.log(value);
+
+            if (name == "red") {
+              color_array[0] = value;
+              //   red_val.value = color_array[0];
+              red_val.value = color_array[0];
+            }
+
+            if (name == "green") {
+              color_array[1] = value;
+              green_val.value = color_array[1];
+            }
+
+            if (name == "blue") {
+              color_array[2] = value;
+              blue_val.value = color_array[2];
+            }
+
+            if (name == "op") {
+              console.log("op");
+              color_array[3] = value / 100;
+              op_val.value = color_array[3];
+            }
+
+            console.log(color_array);
+            // 0-255轉ff  [ff,ff,ff]
+            // let promise = new Promise((resolve) => {
+            // color_array.forEach((item) => {
+            //   item = ten_to_hex(item);
+            // });
+            // });
+
+            change_color();
+          }
+        });
+
+        colors[i].addEventListener("mouseup", function (e) {
+          color_click = false;
+        });
+
+        function change_color() {
+          // console.log(color_array);
+          // 陣列轉字串 join('')
+          // setTimeout(() => {
+          // let str = "#" + color_array.join("");
+          hex.value = `#${ten_to_hex(color_array[0])}${ten_to_hex(
+            color_array[1]
+          )}${ten_to_hex(color_array[2])}`;
+
+          rgba.value = color_array.join(",");
+
+          let str = `rgba(${color_array[0]},${color_array[1]},${color_array[2]},${color_array[3]}`;
+
+          // let str = `rgba(${color_array}`;
+          // 前面加上#
+          // 把值丟給color_dom
+          // console.log(color_dom);
+          color_dom.style.backgroundColor = str;
+          // }, 50);
+        }
+
+        function hex_change(val) {
+          //   hex.innerHTML = val;
+          // 去除#號
+          val1 = val.slice(1);
+          console.log(val1);
+          // #ffffff解碼 塞回 color_array
+          let r = val1.slice(0, 2);
+          let g = val1.slice(2, 4);
+          let b = val1.slice(4, 6);
+          r = hex_to_ten(r);
+          g = hex_to_ten(g);
+          b = hex_to_ten(b);
+          console.log(b);
+
+          color_array[0] = r;
+          color_array[1] = g;
+          color_array[2] = b;
+          console.log(color_array);
+          // 轉乘10進字 給拉桿賦值
+          colors[0].value = r;
+          colors[1].value = g;
+          colors[2].value = b;
+
+          vals[0].value = r;
+          vals[1].value = g;
+          vals[2].value = b;
+
+          //   colors[3] = 1;
+          //   let num = hex_to_ten(val);
+          //   console.log(num);
+        }
+
+        function ten_to_hex(num) {
+          console.log(num);
+          let str = "";
+          let big = Math.floor(num / 16);
+          big = num_to_hex(big);
+          let small = num % 16;
+          small = num_to_hex(small);
+          str = `${big}${small}`;
+          console.log(str);
+
+          return str;
+        }
+      }
+
+      function num_to_hex(num) {
+        console.log(num);
+        //   FF = 15x16+15x1
+        //     = 240+15
+        //     = 255
+        // F=15
+        if (num == 15) return "f";
+        if (num == 14) return "e";
+        if (num == 13) return "d";
+        if (num == 12) return "c";
+        if (num == 11) return "b";
+        if (num == 10) return "a";
+        return num;
+      }
+
+      function hex_to_ten(str) {
+        console.log(str);
+        let big = str.slice(0, 1);
+        big = hex_to_num(big);
+        console.log("big:", big);
+        let small = str.slice(1);
+        small = hex_to_num(small);
+        console.log("small:", small);
+
+        let num = big * 16 + parseInt(small);
+        console.log(num);
+        return num;
+      }
+
+      function hex_to_num(str) {
+        console.log(str);
+        if (str == "f") return 15;
+        if (str == "e") return 14;
+        if (str == "d") return 13;
+        if (str == "c") return 12;
+        if (str == "b") return 11;
+        if (str == "a") return 10;
+
+        return str;
+      }
+
+      hex_to_ten("10");
+      ten_to_hex(0);
+    </script>
+  </body>
+</html>
