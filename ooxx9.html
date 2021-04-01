@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      *,
+      div {
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .ooxx {
+        width: 500px;
+        /* height: 500px; */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      fieldset {
+        /* margin-bottom: 10px; */
+        width: 500px;
+      }
+
+      table {
+        margin-top: 4px;
+        margin-bottom: 10px;
+        border-collapse: collapse;
+        border: none;
+      }
+
+      tr {
+        position: relative;
+      }
+
+      tr::after {
+        content: "";
+        position: absolute;
+        background-color: black;
+        width: 500px;
+        height: 10px;
+        left: 0;
+        /* top: 400px; */
+      }
+
+      tr:nth-child(1):after {
+        background-color: transparent;
+      }
+
+      tr::before {
+        content: "";
+        position: absolute;
+        background-color: black;
+        width: 10px;
+        height: 500px;
+        top: 0;
+      }
+
+      tr:nth-child(1):before {
+        background-color: transparent;
+      }
+
+      tr:nth-child(2):before {
+        left: 166px;
+      }
+      tr:nth-child(3):before {
+        left: 332px;
+      }
+
+      td {
+        text-align: center;
+        /* border: 1px solid red; */
+        width: 32%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="ooxx"> -->
+    <fieldset class="ooxx">
+      <legend>OOXX</legend>
+      <table width="500" height="500">
+        <tbody>
+          <tr>
+            <td onclick="clickHandler(this,[0,0])">&nbsp</td>
+            <td onclick="clickHandler(this,[0,1])">&nbsp</td>
+            <td onclick="clickHandler(this,[0,2])">&nbsp</td>
+          </tr>
+          <tr>
+            <td onclick="clickHandler(this,[1,0])">&nbsp</td>
+            <td onclick="clickHandler(this,[1,1])">&nbsp</td>
+            <td onclick="clickHandler(this,[1,2])">&nbsp</td>
+          </tr>
+          <tr>
+            <td onclick="clickHandler(this,[2,0])">&nbsp</td>
+            <td onclick="clickHandler(this,[2,1])">&nbsp</td>
+            <td onclick="clickHandler(this,[2,2])">&nbsp</td>
+          </tr>
+        </tbody>
+      </table>
+    </fieldset>
+    <!-- </div> -->
+
+    <script>
+      let data = [
+        [null, null, null],
+        [null, null, null],
+        [null, null, null],
+      ];
+
+      //   let data = [
+      //     ["X", "O", "X"],
+      //     ["O", "X", null],
+      //     ["X", null, "O"],
+      //   ];
+
+      let peoples = function () {
+        let x = true;
+        return {
+          get: function () {
+            if (x) {
+              x = false;
+              return "O";
+            } else {
+              x = true;
+              return "X";
+            }
+          },
+        };
+      };
+
+      let people = peoples();
+      //   console.log(people.get());
+      //   console.log(people.get());
+      //   console.log(people.get());
+
+      function check_all(coordinate) {
+        let x = coordinate[0];
+        let y = coordinate[1];
+        console.log("x:", x, "y:", y);
+        let val = data[x][y];
+        console.log("val:", val);
+
+        let row = check_row(x);
+        console.log("row:", row);
+        let col = check_col(y);
+        console.log("col:", col);
+        let slash = check_slash();
+        console.log(slash);
+        let Backslash = check_Backslash();
+        console.log(Backslash);
+
+        if (
+          row === true ||
+          col === true ||
+          slash === true ||
+          Backslash === true
+        ) {
+          alert(`${val}贏了`);
+        }
+      }
+
+      function data_is_same(ary) {
+        console.log(ary);
+        let temp = ary[0];
+        if (temp != null) {
+          // 檢查是否都相同
+          for (let i = 0; i < ary.length; i++) {
+            if (temp != ary[i]) {
+              return false;
+            }
+          }
+          return true;
+        }
+      }
+
+      function check_row(x) {
+        console.log(x);
+        // [0,0]
+        // 檢查[0,0] [0,1] [0,2]
+        // [1,0]
+        // 檢查[1,0] [1,1] [1,2]
+        // [2,0]
+        // 檢查[2,0] [2,1] [2,2]
+
+        let ary = [];
+        // 將座標的橫向取出
+        for (let i = 0; i <= 2; i++) {
+          ary.push(data[x][i]);
+        }
+
+        return data_is_same(ary);
+      }
+
+      function check_col(y) {
+        console.log(y);
+        let ary = [];
+        for (let i = 0; i <= 2; i++) {
+          ary.push(data[i][y]);
+        }
+
+        return data_is_same(ary);
+      }
+
+      function check_slash() {
+        let ary = [];
+        // 將座標的/向取出
+        for (let i = 0; i <= 2; i++) {
+          ary.push(data[2 - i][0 + i]);
+        }
+        console.log(ary);
+
+        let temp = ary[0];
+
+        return data_is_same(ary);
+      }
+
+      function check_Backslash() {
+        let ary = [];
+        // 將座標的\向取出
+        for (let i = 0; i <= 2; i++) {
+          ary.push(data[0 + i][0 + i]);
+        }
+
+        return data_is_same(ary);
+      }
+
+      //   console.log("check_all:", check_all([0, 2], "X"));
+
+      function clickHandler(self, path) {
+        console.log(self, path);
+        let people_vel = people.get();
+        if (data[path[0]][path[1]] === null) {
+          self.innerHTML = people_vel;
+          data[path[0]][path[1]] = people_vel;
+          console.log(data);
+          setTimeout(() => {
+            check_all(path);
+          }, 50);
+        }
+      }
+    </script>
+  </body>
+</html>
