@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>井字遊戲</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -49,6 +49,16 @@
 
       tr {
       }
+      td {
+        /* display: inline-block; */
+        width: 166.6px;
+      }
+
+      td:nth-child(3n + 2),
+      td:nth-child(3n + 3) {
+        margin-left: 10px;
+        color: red;
+      }
 
       tr::after {
         content: "";
@@ -62,6 +72,14 @@
 
       tr:nth-child(1):after {
         background-color: transparent;
+      }
+
+      tr:nth-child(2):after {
+        top: 161.6px;
+      }
+
+      tr:nth-child(3):after {
+        top: 328px;
       }
 
       tr::before {
@@ -78,22 +96,23 @@
       }
 
       tr:nth-child(2):before {
-        left: 166px;
+        left: 161.6px;
         /* top: -100px; */
       }
 
       tr:nth-child(3):before {
-        left: 332px;
+        left: 328px;
         /* top: -200px; */
       }
 
       td {
         text-align: center;
         /* border: 1px solid red; */
-        width: 32%;
+        /* width: 33.3%; */
       }
 
-      .pre_load,td,
+      .pre_load,
+      td,
       .fa-circle-thin,
       .fa-times {
         font-size: 90px;
@@ -119,20 +138,33 @@
           width: 300px;
         }
 
+        tr:nth-child(2):after {
+          top: 95px;
+        }
+
+        tr:nth-child(3):after {
+          top: 195px;
+        }
+
         tr::before {
           /* width: 400px; */
           height: 300px;
         }
 
         tr:nth-child(2):before {
-          left: 100px;
+          left: 97px;
         }
 
         tr:nth-child(3):before {
-          left: 200px;
+          left: 193px;
         }
 
-        .pre_load,td,
+        td{
+            width: 33.3%;
+        }
+
+        .pre_load,
+        td,
         .fa-circle-thin,
         .fa-times {
           font-size: 60px;
