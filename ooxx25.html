@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>井字遊戲</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      *,
+      div {
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        font-family: monospace;
+      }
+
+      .ooxx {
+        width: 500px;
+        /* height: 500px; */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      fieldset {
+        /* margin-bottom: 10px; */
+        width: 500px;
+        /* border-radius: 20px; */
+      }
+
+      legend {
+        position: relative;
+        /* left: 15px; */
+      }
+
+      fieldset {
+        border: 0;
+        padding: 10px;
+        margin-bottom: 10px;
+        /* background: #eee; */
+        border-radius: 8px;
+        /* z-index: -11; */
+        background: -webkit-linear-gradient(top, #eee, #ddd);
+        background: -moz-linear-gradient(top, #eee, #ddd);
+        position: relative;
+        /* margin-top: 10px; */
+        box-shadow: 3px 3px 10px #666;
+
+        /* border-top: 68px solid grey; */
+        border-top: 28px solid grey;
+      }
+
+      legend {
+        padding: 5px 10px;
+        /* background-color: #4f709f; */
+        background: linear-gradient(180deg, #4f709f, #3e598e, #2d487d);
+        color: #fff;
+        font-size: 30px;
+        border-radius: 20px;
+
+        /* padding: 5px 10px; */
+        padding: 10px 20px;
+
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+
+        /* box-shadow: 2px 2px 4px #666;
+        -moz-box-shadow: 2px 2px 4px #666;
+        -webkit-box-shadow: 2px 2px 4px #666; */
+
+        /* position: absolute; */
+        /* left: 10px; */
+        /* top: -11px; */
+
+        position: relative;
+        left: 0px;
+        /* top: -30px; */
+        transition: 0.5s;
+
+        overflow: inherit;
+        z-index: 10;
+      }
+
+      legend.active {
+        top: 0;
+      }
+
+      .win i,
+      .win {
+        font-size: 30px;
+      }
+
+      .win {
+        width: 200px;
+        position: absolute;
+        text-align: center;
+        top: -20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        padding: 20px 50px;
+        box-shadow: 5px 5px 10px #4f709f;
+      }
+
+      .win.active {
+        top: 49%;
+        opacity: 0.8;
+      }
+
+      table {
+        margin-top: 4px;
+        margin-bottom: 10px;
+        border-collapse: collapse;
+        border: none;
+        width: 500px;
+        height: 500px;
+        position: relative;
+        filter: drop-shadow(2px 2px 4px #666);
+        /* filter: drop-shadow(2px 2px 4px #777); */
+      }
+
+      tr {
+      }
+      td {
+        /* display: inline-block; */
+        width: 166.6px;
+      }
+
+      td:nth-child(3n + 2),
+      td:nth-child(3n + 3) {
+        /* margin-left: 10px; */
+        /* color: red; */
+      }
+
+      tr::after {
+        content: "";
+        position: absolute;
+        background-color: black;
+        width: 500px;
+        height: 10px;
+        left: 0;
+        /* top: 400px; */
+      }
+
+      tr:nth-child(1):after {
+        background-color: transparent;
+      }
+
+      tr:nth-child(2):after {
+        top: 161.6px;
+      }
+
+      tr:nth-child(3):after {
+        top: 328px;
+      }
+
+      tr::before {
+        content: "";
+        position: absolute;
+        background-color: black;
+        width: 10px;
+        height: 500px;
+        top: 0;
+      }
+
+      tr:nth-child(1):before {
+        background-color: transparent;
+      }
+
+      tr:nth-child(2):before {
+        left: 161.6px;
+        /* top: -100px; */
+      }
+
+      tr:nth-child(3):before {
+        left: 328px;
+        /* top: -200px; */
+      }
+
+      td {
+        text-align: center;
+        /* border: 1px solid red; */
+        /* width: 33.3%; */
+      }
+
+      .pre_load,
+      td,
+      .fa-circle-thin,
+      .fa-times {
+        font-size: 90px;
+      }
+
+      td {
+        /* filter:drop-shadow(2px 2px 4px #000); */
+      }
+
+      .pre_load {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 13;
+      }
+
+      .pre_load .container {
+        /* background-color: rgba(1, 1, 1, 0.3); */
+        /* width: 500px; */
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        opacity: 0.8;
+        z-index: 3;
+        /* width: 350px; */
+        border-radius: 20px;
+        padding: 10px;
+        /* pointer-events: auto; */
+      }
+
+      .pre_load.loadend {
+        opacity: 0;
+        pointer-events: none;
+        z-index: -13;
+      }
+
+      @media (max-width: 500px) {
+        table {
+          width: 300px;
+          height: 300px;
+        }
+
+        .ooxx {
+          width: 300px;
+        }
+
+        fieldset {
+          border-top: 14px solid grey;
+        }
+
+        tr::after {
+          width: 300px;
+        }
+
+        tr:nth-child(2):after {
+          top: 95px;
+        }
+
+        tr:nth-child(3):after {
+          top: 195px;
+        }
+
+        tr::before {
+          /* width: 400px; */
+          height: 300px;
+        }
+
+        tr:nth-child(2):before {
+          left: 97px;
+        }
+
+        tr:nth-child(3):before {
+          left: 193px;
+        }
+
+        td {
+          width: 33.3%;
+        }
+
+        .win i {
+          position: relative;
+          top: -1px;
+        }
+
+        .win.active {
+          top: 49%;
+          opacity: 0.8;
+        }
+
+        .pre_load,
+        td,
+        .fa-circle-thin,
+        .fa-times {
+          font-size: 60px;
+          text-align: center;
+        }
+
+        .fa-circle-thin {
+          position: relative;
+          top: 3px;
+        }
+
+        legend {
+          font-size: 16px;
+          padding: 5px 10px;
+          top: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <div class="ooxx"> -->
+    <fieldset class="ooxx" onload="test2()">
+      <legend>井字遊戲</legend>
+      <legend class="win">你贏了</legend>
+      <table>
+        <tbody>
+          <!-- <tr>
+            <td onclick="clickHandler(this,[0,0])">&nbsp</td>
+            <td onclick="clickHandler(this,[0,1])">&nbsp</td>
+            <td onclick="clickHandler(this,[0,2])">&nbsp</td>
+          </tr>
+          <tr>
+            <td onclick="clickHandler(this,[1,0])">&nbsp</td>
+            <td onclick="clickHandler(this,[1,1])">&nbsp</td>
+            <td onclick="clickHandler(this,[1,2])">&nbsp</td>
+          </tr>
+          <tr>
+            <td onclick="clickHandler(this,[2,0])">&nbsp</td>
+            <td onclick="clickHandler(this,[2,1])">&nbsp</td>
+            <td onclick="clickHandler(this,[2,2])">&nbsp</td>
+          </tr> -->
+
+          <tr>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+          </tr>
+          <tr>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+          </tr>
+          <tr>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+            <td>&nbsp</td>
+          </tr>
+        </tbody>
+      </table>
+    </fieldset>
+    <!-- </div> -->
+    <div class="pre_load" onload="init1(this)" id="init_dom">
+      <div class="container">
+        <i class="fa fa-circle-thin" aria-hidden="true"></i>
+        <i class="fa fa-times" aria-hidden="true"></i>
+        <p>載入中</p>
+        <p></p>
+      </div>
+    </div>
+  </body>
+  <script>
+    //   console.log(init_dom);
+    //   init_dom.classList.add("loadend");
+    setTimeout(() => {
+      init_dom.classList.add("loadend");
+    }, 500);
+
+    let win = document.querySelector(".win");
+
+    let peoples = function () {
+      let x = true;
+      return {
+        get: function () {
+          if (x) {
+            x = false;
+            return "O";
+            //   return '<i class="fa fa-circle-thin" aria-hidden="true"></i>';
+          } else {
+            x = true;
+            return "X";
+            //   return '<i class="fa fa-times" aria-hidden="true"></i>';
+          }
+        },
+      };
+    };
+
+    let people = peoples();
+
+    //   'DOMContentLoaded';
+    let body = document.querySelector("body");
+    console.log(body);
+    body.addEventListener("DOMContentLoaded", init1);
+    function init1() {
+      // console.log(self);
+      init_dom.classList.add("loadend");
+    }
+
+    function test2() {
+      alert("load");
+    }
+    let data = [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ];
+
+    //   let data = [
+    //     ["X", "O", "X"],
+    //     ["O", "X", null],
+    //     ["X", null, "O"],
+    //   ];
+    let tbody = document.querySelector("tbody");
+    let tds = document.querySelectorAll("td");
+    // <td onclick="clickHandler(this,[0,0])">&nbsp</td>
+
+    // let html = "";
+    // for (let i = 0; i < 3; i++) {
+    //   html += "<tr>";
+    //   for (let j = 0; j < 3; j++) {
+    //     html += `<td onclick="clickHandler(this,[${i},${j}])">&nbsp</td>`;
+    //   }
+    //   html += "</tr>";
+    // }
+
+    // let html = "";
+    // for (let i = 0; i < 3; i++) {
+    //   html += "<tr>";
+    //   for (let j = 0; j < 3; j++) {
+    //     html += `<td">&nbsp</td>`;
+    //   }
+    //   html += "</tr>";
+    // }
+    // setTimeout(() => {
+    //     console.log(html);
+    //     tbody.innerHTML = html;
+
+    // }, 500);
+
+    console.log(tds);
+    let tds_methods = [
+      [0, 0],
+      [0, 1],
+      [0, 2],
+      [1, 0],
+      [1, 1],
+      [1, 2],
+      [2, 0],
+      [2, 1],
+      [2, 2],
+    ];
+
+    // for (let i = 0; i < tds.length; i++) {
+    //   tds[i].addEventListener("click", function () {
+    //     clickHandler(this, [tds_methods[i][0], tds_methods[i][1]]);
+    //   });
+    // }
+
+    for (let i = 0; i < tds.length; i++) {
+      tds[i].id = tds_methods[i];
+      //   tds[i]["x"] = tds_methods[i][0];
+      tds[i].setAttribute("x", tds_methods[i][0]);
+      tds[i].setAttribute("y", tds_methods[i][1]);
+
+      tds[i].addEventListener("click", clickHandler);
+    }
+
+    setTimeout(() => {
+      tds = document.querySelectorAll("td");
+      console.log(tds);
+    }, 500);
+
+    //   console.log(people.get());
+    //   console.log(people.get());
+    //   console.log(people.get());
+
+    function check_all(coordinate) {
+      let x = coordinate[0];
+      let y = coordinate[1];
+      console.log("x:", x, "y:", y);
+      let val = data[x][y];
+      console.log("val:", val);
+
+      let row = check_row(x);
+      console.log("row:", row);
+      let col = check_col(y);
+      console.log("col:", col);
+      let slash = check_slash();
+      console.log(slash);
+      let Backslash = check_Backslash();
+      console.log(Backslash);
+
+      if (
+        row === true ||
+        col === true ||
+        slash === true ||
+        Backslash === true
+      ) {
+        // tds = document.querySelectorAll("td");
+        console.log(tds);
+        // tds.forEach((td) => {
+        //   td.removeEventListener("click", clickHandler, false);
+        //   td.onclick = function () {
+        //     return false;
+        //   };
+        // });
+
+        for (let i = 0; i < tds.length; i++) {
+          tds[i].removeEventListener("click", clickHandler);
+        }
+
+        console.log(`${val}贏了`);
+        if (val == "O") {
+          win.innerHTML = `<i class="fa fa-circle-thin" aria-hidden="true"></i>贏了`;
+        }
+
+        if (val == "X") {
+          win.innerHTML = `<i class="fa fa-times" aria-hidden="true"></i>贏了`;
+        }
+
+        win.classList.add("active");
+        // alert(`${val}贏了`);
+      }
+    }
+
+    function data_is_same(ary) {
+      console.log(ary);
+      let temp = ary[0];
+      if (temp != null) {
+        // 檢查是否都相同
+        for (let i = 0; i < ary.length; i++) {
+          if (temp != ary[i]) {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+
+    function check_row(x) {
+      console.log(x);
+      // [0,0]
+      // 檢查[0,0] [0,1] [0,2]
+      // [1,0]
+      // 檢查[1,0] [1,1] [1,2]
+      // [2,0]
+      // 檢查[2,0] [2,1] [2,2]
+
+      let ary = [];
+      // 將座標的橫向取出
+      for (let i = 0; i <= 2; i++) {
+        ary.push(data[x][i]);
+      }
+
+      return data_is_same(ary);
+    }
+
+    function check_col(y) {
+      console.log(y);
+      let ary = [];
+      for (let i = 0; i <= 2; i++) {
+        ary.push(data[i][y]);
+      }
+
+      return data_is_same(ary);
+    }
+
+    function check_slash() {
+      let ary = [];
+      // 將座標的/向取出
+      for (let i = 0; i <= 2; i++) {
+        ary.push(data[2 - i][0 + i]);
+      }
+      console.log(ary);
+
+      let temp = ary[0];
+
+      return data_is_same(ary);
+    }
+
+    function check_Backslash() {
+      let ary = [];
+      // 將座標的\向取出
+      for (let i = 0; i <= 2; i++) {
+        ary.push(data[0 + i][0 + i]);
+      }
+
+      return data_is_same(ary);
+    }
+
+    //   console.log("check_all:", check_all([0, 2], "X"));
+
+    function clickHandler(e) {
+      console.log(
+        e,
+        e.target,
+        e.target.getAttribute("x"),
+        e.target.getAttribute("y")
+      );
+
+      let self = e.target;
+      // 取得 O/X
+
+      let x = parseInt(self.getAttribute("x"));
+      let y = parseInt(self.getAttribute("y"));
+
+      if (data[x][y] === null) {
+        let people_vel = people.get();
+        // 先塞入data後
+        data[x][y] = people_vel;
+        // 在轉icon塞給dom
+        if (people_vel == "O") {
+          self.innerHTML =
+            '<i class="fa fa-circle-thin" aria-hidden="true"></i>';
+        }
+
+        if (people_vel == "X") {
+          self.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+        }
+
+        console.log(data);
+        setTimeout(() => {
+          check_all([x, y]);
+        }, 50);
+      }
+    }
+  </script>
+</html>
