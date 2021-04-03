@@ -92,8 +92,9 @@
         top: 0;
       }
 
-      .win i,.win{
-          font-size: 30px;
+      .win i,
+      .win {
+        font-size: 30px;
       }
 
       .win {
@@ -106,7 +107,6 @@
         opacity: 0;
         padding: 20px 50px;
       }
-
 
       .win.active {
         top: 49%;
@@ -262,14 +262,11 @@
           width: 33.3%;
         }
 
-        .win i{
-            position: relative;
-            top: -1px;
+        .win i {
+          position: relative;
+          top: -1px;
         }
 
-       
-
-        
         .pre_load,
         td,
         .fa-circle-thin,
@@ -336,10 +333,11 @@
     <!-- </div> -->
     <div class="pre_load" onload="init1(this)" id="init_dom">
       <div class="container">
-        載入中
-        <br>
-        <i class="fa fa-circle-thin" aria-hidden="true"></i>
-        <i class="fa fa-times" aria-hidden="true"></i>
+        <p>載入中</p>
+        <p>
+          <i class="fa fa-circle-thin" aria-hidden="true"></i>
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </p>
       </div>
     </div>
   </body>
@@ -501,7 +499,6 @@
         if (val == "X") {
           win.innerHTML = `<i class="fa fa-times" aria-hidden="true"></i>贏了`;
         }
-
 
         win.classList.add("active");
         // alert(`${val}贏了`);
