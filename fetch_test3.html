@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .newImg {
+        width: 500px;
+        height: 500px;
+        overflow: hidden;
+    }
+
+    .newImg img {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <h2>Hello Fetch</h2>
+    <div class="newImg"></div>
+    <div class="newTxt"></div>
+    <div class="newJson"></div>
+    <div class="newJson"></div>
+
+    <script>
+        // unsplash 上的圖片
+        let url = 'https://images.unsplash.com/photo-1513313778780-9ae4807465f0?auto=format&fit=crop&w=634&q=80'
+        fetch(url)
+            .then((response) => {
+                return response.blob();
+            })
+            .then((imageBlob) => {
+                let img = document.createElement('IMG')
+                document.querySelector('.newImg').appendChild(img);
+                // 將 blog 物件轉為 url
+                img.src = URL.createObjectURL(imageBlob);
+            })
+
+        // https://tsfmakko.github.io/myweb/fetch_txt_test.text
+        // let url2 = './fetch_txt_test.text'
+        // fetch(url2)
+        //     .then((response) => {
+        //         return response.text();
+        //     })
+        //     .then((txt) => {
+        //         console.log(txt);
+        //         let p = document.createElement('p')
+        //         p.innerHTML = txt;
+        //         // 將 blog 物件轉為 url
+        //         // img.src = URL.createObjectURL(txt);
+        //         document.querySelector('.newTxt').appendChild(p);
+        //     })
+
+        // https://tsfmakko.github.io/myweb/fetch_json.json
+        let url3 = 'https://tsfmakko.github.io/myweb/fetch_json.json';
+        fetch(url3)
+            .then((response) => {
+                return response.json();
+            })
+            .then((txt) => {
+                console.log(txt);
+                let p = document.createElement('p')
+                p.innerHTML = txt;
+                // 將 blog 物件轉為 url
+                // img.src = URL.createObjectURL(txt);
+                document.querySelector('.newJson').appendChild(p);
+            })
+
+        let url4 = './fetch_json.json';
+        fetch(url4)
+            .then((response) => {
+                return response.json();
+            })
+            .then((txt) => {
+                console.log(txt);
+                let p = document.createElement('p')
+                p.innerHTML = txt;
+                // 將 blog 物件轉為 url
+                // img.src = URL.createObjectURL(txt);
+                document.querySelector('.newJson2').appendChild(p);
+            })
+    </script>
+</body>
+
+</html>
