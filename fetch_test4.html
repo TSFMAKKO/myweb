@@ -25,9 +25,12 @@
     <div class="newTxt"></div>
     <div class="newJson"></div>
     <div class="newJson2"></div>
+    <div class="axios"></div>
 
     <div class="newJson3"></div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous"></script>
     <script>
         // unsplash 上的圖片
         let url = 'https://images.unsplash.com/photo-1513313778780-9ae4807465f0?auto=format&fit=crop&w=634&q=80'
@@ -60,18 +63,22 @@
 
         // https://tsfmakko.github.io/myweb/fetch_json.json
         // let url3 = 'https://tsfmakko.github.io/myweb/fetch_json.json';
-        // fetch(url3)
-        //     .then((response) => {
-        //         return response.json();
-        //     })
-        //     .then((txt) => {
-        //         console.log(txt);
-        //         let p = document.createElement('p')
-        //         p.innerHTML = txt;
-        //         // 將 blog 物件轉為 url
-        //         // img.src = URL.createObjectURL(txt);
-        //         document.querySelector('.newJson').appendChild(p);
-        //     })
+        let url3 = 'https://data.taipei/api/v1/dataset/cb0a6b48-9d85-4e7a-8134-a14552de7574?scope=resourceAquire';
+        fetch(url3)
+            .then((response) => {
+                return response.json();
+            })
+            .then((res) => {
+                console.log(res);
+                console.log(res.result.results[0]);
+                let p = document.createElement('p');
+                // p.innerHTML = res.result.results[0]['109年件數'];
+                // p.innerHTML = Object.keys(res.result.results[0]);
+                p.innerHTML = JSON.stringify(res.result.results[0]);
+                // 將 blog 物件轉為 url
+                // img.src = URL.createObjectURL(txt);
+                document.querySelector('.newJson').appendChild(p);
+            })
 
         // let url4 = './fetch_json.json';
         // fetch(url4)
@@ -93,9 +100,9 @@
             console.log('startRequest');
             // XHR = createXMLHttpRequest();
             XHR = new XMLHttpRequest();
-            // XHR.open('GET', './fetch_json.json', ture);
+            XHR.open('GET', './fetch_json.json');
             // XHR.open('GET', 'https://data.taipei/api/v1/dataset/cb0a6b48-9d85-4e7a-8134-a14552de7574?scope=resourceAquire');
-            XHR.open('GET', 'https://tsfmakko.github.io/myweb/fetch_json.json');
+            // XHR.open('GET', 'https://tsfmakko.github.io/myweb/fetch_json.json');
             XHR.onreadystatechange = handleStateChange;
             XHR.send(null);
         }
@@ -111,6 +118,10 @@
         }
 
         startRequest();
+
+        axios
+            .get('https://www.runoob.com/try/ajax/json_demo.json')
+            .then(response => (this.info = response.data.sites))
     </script>
 </body>
 
