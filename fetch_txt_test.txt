@@ -1,1 +1,1 @@
-���ե�fetch���txt�ɮ�
+﻿測試用fetch抓取txt檔案
