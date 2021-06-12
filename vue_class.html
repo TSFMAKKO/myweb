@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .active {
+        color: red;
+      }
+
+      .aaa {
+      }
+
+      .bbb {
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div :class="myClass1">123</div>
+      <button @click="changeHandler">btn</button>
+    </div>
+
+    <div id="app2">
+      <div :class="{active:isActive}">123</div>
+      <button @click="changeHandler2">btn</button>
+    </div>
+
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.2/vue.js"
+      integrity="sha512-9cBpxTrWHJC8JqDUn0uJpGWG80V3DiGiu2u1YHt2EqF+qloD6IvkOJaIZOdGBOTy0BisjueoEyG7vsdEYlmi4g=="
+      crossorigin="anonymous"
+    ></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script>
+      let vm = new Vue({
+        el: "#app",
+        data: {
+          myClass1: {
+            active: true,
+            aaa: false,
+            bbb: true,
+          },
+        },
+        methods: {
+          changeHandler: function () {
+            this.myClass1.active = !this.myClass1.active;
+          },
+        },
+      });
+
+      let vm2 = new Vue({
+        el: "#app2",
+        data: {
+          isActive: true,
+        },
+        methods: {
+          changeHandler2: function () {
+            this.isActive = !this.isActive;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
