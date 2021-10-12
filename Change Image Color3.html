@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            overflow: hidden;
+        }
+        
+        .bgBox{
+            position: relative;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            /* height: 100%; */
+            /* position: absolute; */
+            position: relative;
+            /* bottom: 0; */
+            vertical-align: bottom;
+
+            /* z-index: 2; */
+        }
+
+        #bg {
+            position: absolute;
+            /* bottom: 0; */
+            top: 0;
+            width: 100vw;
+            height: 100%;
+            /* transition: .5s; */
+            /*  */
+            mix-blend-mode: hue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bgBox">
+        <img src="bg3.jpg" alt="" srcset="">
+        <div id="bg">
+        </div>
+    </div>
+
+    <script>
+        let bg = document.getElementById('bg')
+        function randomColor() {
+            return Math.floor(Math.random() * 255)
+        }
+
+        bg.addEventListener('click', () => {
+            bg.style.backgroundColor = `rgba(${randomColor()},${randomColor()},${randomColor()})`
+        })
+
+
+    </script>
+</body>
+
+</html>
