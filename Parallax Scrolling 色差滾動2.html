@@ -30,14 +30,16 @@
             align-items: center;
         }
 
+        /* 讓圖片底部覆蓋些顏色 */
         section::before {
             content: '';
             position: absolute;
             /* 固定在底部 */
             bottom: 0;
+            /* 跟圖片相等 */
             width: 100%;
             height: 100%;
-            /*  */
+            /* 下往上 */
             background: linear-gradient(to top, #0a2a43, transparent);
             z-index: 1000;
         }

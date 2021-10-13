@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        datalist {
+            position: absolute;
+            max-height: 20em;
+            border: 0 none;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        datalist option {
+            font-size: 0.8em;
+            padding: 0.3em 1em;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+
+        /* option active styles */
+        datalist option:hover,
+        datalist option:focus {
+            color: #fff;
+            background-color: #036;
+            outline: 0 none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <input list="xyz" name="input name">
+    <datalist id="xyz">
+        <option value="">aaa</option>
+        <option value="">aab</option>
+        <option value="">aac</option>
+        <option value="">aba</option>
+        <option value="">abb</option>
+        <option value="">abc</option>
+        <option value="">aca</option>
+        <option value="">acb</option>
+        <option value="">acc</option>
+    </datalist> -->
+
+    <label for="browser">browser:</label>
+
+    <input list="browserdata" id="browser" name="browser" size="50" autocomplete="off" />
+
+    <datalist id="browserdata">
+        <option>Brave</option>
+        <option>Chrome</option>
+        <option>Edge</option>
+        <option>Firefox</option>
+        <option>Internet Explorer</option>
+        <option>Opera</option>
+        <option>Safari</option>
+        <option>Vivaldi</option>
+        <option>other</option>
+    </datalist>
+
+    <script src="https://cdn.jsdelivr.net/npm/datalist-css/dist/datalist-css.min.js"></script>
+
+</body>
+
+</html>
