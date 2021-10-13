@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>視差滾動 Parallax Scrolling</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="./parallax.js-1.5.0/parallax.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: sans-serif;
+        }
+
+        :root {
+            /* --bg: #f9f9f9; */
+            --bg: #ededed;
+            /* --bg: #f00; */
+        }
+
+        .container {
+            width: 70vw;
+            min-height: 960px;
+            margin: 0 auto;
+            background-color: var(--bg);
+            font-size: 24px;
+            padding: 25px;
+            z-index: -3;
+        }
+
+        .parallax-window {
+            min-height: 400px;
+            padding: 100px 35px;
+            background: transparent;
+            z-index: 1;
+        }
+
+        .info {
+            z-index: 2;
+            position: relative;
+            color: aliceblue;
+        }
+
+        h2 {
+            padding: 10px;
+        }
+
+        @media(max-width:499px) {
+            .container {
+                width: 350px;
+            }
+
+            .parallax-window {
+                /* min-height: 400px; */
+                padding: 20px 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, cum.</h2>
+        <div class="parallax-window" data-parallax="scroll" data-z-index="1" data-image-src="./bg.jpg">
+            <h2 class="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit repellendus natus nam
+                quam,
+                non voluptate? Iste, beatae! Perspiciatis est magnam cupiditate rerum officia, illum unde consequuntur
+                quas
+                ipsam repellendus omnis.</h2>
+        </div>
+
+        <h2>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, quos?</h2>
+        <div class="parallax-window" data-parallax="scroll" data-z-index="1" data-image-src="./bg2.jpg"></div>
+        <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate, accusantium.</h2>
+        <div class="parallax-window" data-parallax="scroll" data-z-index="1" data-image-src="./bg3.jpg"></div>
+    </div>
+
+    <script>
+        // $('.parallax-window').parallax({imageSrc: './bg.jpg'});
+    </script>
+</body>
+
+</html>
