@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>視差滾動 Parallax Scrolling</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            background-color: #666;
+            color: #fff;
+            font-size: 200px;
+            line-height: 100vh;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .topic1 {
+            background-image: url("bg.jpg");
+        }
+
+        .topic3 {
+            background-image: url("bg2.jpg");
+        }
+
+        .topic5 {
+            background-image: url("bg3.jpg");
+        }
+    </style>
+</head>
+
+<body>
+    <div class="section topic1">topic1</div>
+    <div class="section topic2">topic2</div>
+    <div class="section topic3">topic3</div>
+    <div class="section topic4">topic4</div>
+    <div class="section topic5">topic5</div>
+    <div class="section topic6">topic6</div>
+</body>
+
+</html>

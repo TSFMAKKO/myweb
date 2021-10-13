@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>視差滾動 Parallax Scrolling</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="./parallax.js-1.5.0/parallax.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .parallax-window {
+            min-height: 400px;
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>1</h2>
+    <div class="parallax-window" data-parallax="scroll" data-image-src="./bg.jpg"></div>
+    <h2>2</h2>
+    <div class="parallax-window" data-parallax="scroll" data-image-src="./bg.jpg"></div>
+    <h2>2</h2>
+    <div class="parallax-window" data-parallax="scroll" data-image-src="./bg.jpg"></div>
+    <h2>2</h2>
+    <script>
+        // $('.parallax-window').parallax({imageSrc: './bg.jpg'});
+    </script>
+</body>
+
+</html>
