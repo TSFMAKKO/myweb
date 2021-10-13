@@ -17,21 +17,26 @@
         }
 
         :root {
-            --bg: #f9f9f9;
+            /* --bg: #f9f9f9; */
+            --bg: #ededed;
+            /* --bg: #f00; */
         }
 
         .container {
+            width: 70vw;
             min-height: 960px;
             margin: 0 auto;
             background-color: var(--bg);
             font-size: 24px;
             padding: 25px;
+            z-index: -3;
         }
 
         .parallax-window {
             /* min-height: 400px; */
             padding: 100px 35px;
             background: transparent;
+            z-index: 1;
         }
 
         .info {
@@ -47,17 +52,22 @@
 </head>
 
 <body>
-    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, cum.</h2>
-    <div class="parallax-window" data-parallax="scroll" data-z-index="1" data-image-src="./bg.jpg">
-        <h2 class="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit repellendus natus nam quam,
-            non voluptate? Iste, beatae! Perspiciatis est magnam cupiditate rerum officia, illum unde consequuntur quas
-            ipsam repellendus omnis.</h2>
+    <div class="container">
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, cum.</h2>
+        <div class="parallax-window" data-parallax="scroll" data-z-index="1" data-image-src="./bg.jpg">
+            <h2 class="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit repellendus natus nam
+                quam,
+                non voluptate? Iste, beatae! Perspiciatis est magnam cupiditate rerum officia, illum unde consequuntur
+                quas
+                ipsam repellendus omnis.</h2>
+        </div>
+        
+        <h2>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, quos?</h2>
+        <div class="parallax-window" data-parallax="scroll" data-z-index="1" data-image-src="./bg2.jpg"></div>
+        <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate, accusantium.</h2>
+        <div class="parallax-window" data-parallax="scroll" data-z-index="1" data-image-src="./bg3.jpg"></div>
     </div>
 
-    <h2>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, quos?</h2>
-    <div class="parallax-window" data-parallax="scroll" data-image-src="./bg2.jpg"></div>
-    <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate, accusantium.</h2>
-    <div class="parallax-window" data-parallax="scroll" data-image-src="./bg3.jpg"></div>
     <script>
         // $('.parallax-window').parallax({imageSrc: './bg.jpg'});
     </script>
