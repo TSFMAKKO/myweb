@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            height: 2000px;
+            padding: 0;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .bg_fixed {
+            float: left;
+            display: inline-block;
+            width: 33vw;
+            height: 90vh;
+            background-attachment: fixed;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
+        /* 第二組 */
+        .img_absolute {
+            width: 33vw;
+            height: 90vh;
+            float: left;
+            position: relative;
+        }
+
+        
+        .img_absolute img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            position: absolute;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* 第三組 */
+        .img_fixed_container {
+            border: 1px solid red;
+            width: 33vw;
+            height: 90vh;
+            overflow: hidden;
+            /* added */
+            position: absolute;
+            right: 0;
+            /* 裁切 上右下左(不裁切) */
+            clip: rect(0, auto, auto, 0);
+        }
+        
+        .img_fixed {
+            position: fixed;
+            width: 33vw;
+            height: 100vh;
+            /* object-fit: cover; */
+            z-index: -1;
+            right: 0;
+            transform: perspective(0px);
+            /* added */
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="bg_fixed" style="background-image:url('http://placehold.it/500x700')">
+        bg_fixed
+    </div>
+
+    <div class="img_absolute">
+        <img src="http://placehold.it/500x700" />
+        <span>img_absolute</span>
+    </div>
+
+    <div class="img_fixed_container">
+        <img class="img_fixed" src="http://placehold.it/500x700" />
+        <span>img_fixed</span>
+    </div>
+</body>
+
+</html>
