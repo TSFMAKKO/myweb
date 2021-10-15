@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>視差滾動 Parallax Scrolling</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: sans-serif;
+        }
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            background-color: #666;
+            color: #fff;
+            font-size: 200px;
+            line-height: 100vh;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            /* 重點在這裡 */
+            background-attachment: fixed;
+        }
+
+        .topic1 {
+            background-image: url("bg.jpg");
+        }
+
+        .topic3 {
+            background-image: url("bg2.jpg");
+        }
+
+        .topic5 {
+            background-image: url("bg3.jpg");
+        }
+
+        .wrap {
+            /* height: 800px; */
+            /* overflow: hidden; */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="wrap"> -->
+    <div class="section topic1">topic1</div>
+    <!-- <div class="section topic2">topic2</div> -->
+    <div class="section topic3">topic3</div>
+    <!-- <div class="section topic4">topic4</div> -->
+    <div class="section topic5">topic5</div>
+    <!-- <div class="section topic6">topic6</div> -->
+    <!-- </div> -->
+
+
+
+    <script>
+        let body1 = document.querySelector('body')
+        let wrap = document.querySelector('.wrap')
+        console.log(wrap);
+
+        let scroll_temp;
+        let timer;
+
+        window.addEventListener('scroll', function (e) {
+            // console.log(body1.clientHeight);
+            // console.log(wrap.scrollTop);
+            // console.log(window.innerHeight);
+            // console.log(window.pageYOffset);
+            // let one_vh = window.innerHeight;
+            let scroll_top = window.pageYOffset;
+
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                // let page = scroll_top / one_vh;
+
+                // 正的為往下
+                let top_or_down = scroll_top - scroll_temp;
+                console.log('top_or_down', top_or_down);
+                scroll_temp = scroll_top;
+            }, 500)
+
+        })
+    </script>
+</body>
+
+</html>
