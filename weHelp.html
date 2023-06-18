@@ -8,6 +8,7 @@
         *{
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
         body{
             /* background: blueviolet; */
@@ -18,9 +19,13 @@
             background-repeat: no-repeat;
         }
         .header{
-            background-color: blue;
-            text-align: center;
+            background: linear-gradient(to right, #045de9, #3498db);
+            /* text-align: center; */
             width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
         }
 
         .flex{
@@ -40,16 +45,21 @@
             overflow: hidden;
             border-radius: 10px;
             padding: 2px 5px;
-            box-sizing: border-box;
-            overflow-wrap: break-word;
+            
+            /* overflow-wrap: break-word; */
         }
 
-   
+        section:first-child{
+            margin-top: 20px;
+        }
+
+        section:last-child{
+            margin-bottom: 50px;
+        }
 
 
         .container div{
             width: 100%;
-            /* padding: 10px 50px 10px 50px; */
         }
 
         .content{
@@ -76,7 +86,6 @@
     <div id="app" class="flex">
         <div class="container">
             <section v-for="m in msg">
-                <!-- 兩百字內 -->
                 <div class="title">{{m.title}}</div>
                 <hr>
                 <div class="content">{{m.content}}</div>
@@ -86,16 +95,6 @@
     </div>
 
 
-
-<!--     
-    <h2>自我介紹</h2>
-    <div>
-        我是蓬蓬，很喜望能夠加入
-        weHelp，轉職成為網站工程師
-    </div>
-    <section>
-
-    </section> -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
     <script>
         new Vue({
@@ -113,7 +112,7 @@
                 {title:"想描述一件你曾經碰到最困難的事情，如何克服?",
                     content:"最困難的事情算是沒自信而不敢動，萬事起頭難。起頭難是應為自信不足，這時必須去親身執行累積相關經驗，進而得到自信(在過程中就會讓自己動起來+得到多巴胺的加持)"},
                 {title:"關於這份申請網頁，請分享一個你開發時使用的技術心得。",
-                    content:"使用了Vue實現SPA單頁應用渲染"},
+                    content:"使用了Vue實現SPA單頁應用渲染,使用border-box解決padding異常"},
             ]
           }
         });
