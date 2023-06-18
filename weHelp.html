@@ -30,7 +30,7 @@
 
         }
         .container{
-            width: 350px;
+            width: 380px;
         }
 
         section{
@@ -38,12 +38,25 @@
             background-color: white;
             width: 100%;
             overflow: hidden;
-            
+            border-radius: 10px;
+            padding: 2px 5px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
         }
 
-        .container > div{
+   
+
+
+        .container div{
             width: 100%;
-            padding: 2px 5px;
+            /* padding: 10px 50px 10px 50px; */
+        }
+
+        .content{
+            /* padding: 2px 5px; */
+            /* width: 300px; */
+            /* overflow: hidden;  */
+            /* color: red; */
         }
 
 
@@ -61,11 +74,11 @@
 
     <div id="app" class="flex">
         <div class="container">
-            <section class="profile" v-for="m in msg">
+            <section v-for="m in msg">
                 <!-- 兩百字內 -->
                 <div class="title">{{m.title}}</div>
                 <hr>
-                <div>{{m.content}}</div>
+                <div class="content">{{m.content}}</div>
             </section>
     
         </div>
