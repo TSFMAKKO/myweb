@@ -1,132 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>申請WeHelp</title>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        /* background: blueviolet; */
+        font-family: "Helvetica", Arial, sans-serif;
+        background-image: url("image.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .header {
+        background: linear-gradient(to right, #045de9, #3498db);
+        /* text-align: center; */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+      }
+
+      .flex {
+        display: flex;
+        justify-content: center;
+      }
+
+      section {
+        margin: 10px 0 10px 0px;
+        background-color: white;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 10px;
+        padding: 5px 5px;
+        overflow-wrap: break-word;
+      }
+
+      section:first-child {
+        margin-top: 20px;
+      }
+
+      section:last-child {
+        margin-bottom: 50px;
+      }
+
+      .container div {
+        width: 100%;
+      }
+
+      .title {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      @media (max-width: 767px) {
+        .container {
+          width: 90%;
         }
-        body{
-            /* background: blueviolet; */
-            font-family: "Helvetica", Arial, sans-serif;
-            background-image: url("image.jpg");
-            background-size: cover;
-            background-position: center; 
-            background-repeat: no-repeat;
+      }
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .container {
+          width: 500px;
         }
-        .header{
-            background: linear-gradient(to right, #045de9, #3498db);
-            /* text-align: center; */
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50px;
+      }
+
+      @media (min-width: 1024px) {
+        .container {
+          width: 800px;
         }
-
-        .flex{
-            display: flex;
-            justify-content: center;
-            
-
-        }
-
-
-        section{
-            margin: 10px 0 10px 0px;
-            background-color: white;
-            width: 100%;
-            overflow: hidden;
-            border-radius: 10px;
-            padding: 2px 5px;
-            overflow-wrap: break-word;
-        }
-
-        section:first-child{
-            margin-top: 20px;
-        }
-
-        section:last-child{
-            margin-bottom: 50px;
-        }
-
-
-        .container div{
-            width: 100%;
-        }
-
-
-
-        .title{
-            text-align: center;
-            font-weight: bold;
-        }
-
-        @media (max-width: 767px) {
-                .container{
-                width: 90%;
-            }
-                }
-        
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .container{
-                width: 500px;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .container{
-                width: 800px;
-            }
-        }
-
+      }
     </style>
-</head>
-<body>
-    
+  </head>
+  <body>
     <div class="header">
-        <h1>WeHelp申請書</h1>
+      <h1>WeHelp申請書</h1>
     </div>
 
     <div id="app" class="flex">
-        <div class="container">
-            <section v-for="m in msg">
-                <div class="title">{{m.title}}</div>
-                <hr>
-                <div class="content">{{m.content}}</div>
-            </section>
-    
-        </div>
+      <div class="container">
+        <section v-for="d in data">
+          <div class="title">{{d.title}}</div>
+          <hr />
+          <div class="content">{{d.content}}</div>
+        </section>
+      </div>
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
     <script>
-        new Vue({
-          el: '#app',
-          data: {
-            msg: [
-                {title:"兩百字內的個人簡介。",
-                    content:"我是江昱嶔屬於膽大心細+溫柔的人，覺得不重要的會很粗心，覺得重要的事情也是挺鑽牛角尖的。膽子可能也比一般人大些，二十年前在2001年就敢把好幾年過年壓歲錢跟零用錢存下來自己裝電腦安裝系統，在現在也敢自己換智慧型手機的螢幕/電池，或第一次出國就是一個人自助旅行(路人覺得我挺大膽的)，至於心細則是上職訓櫃檯小姐覺得我還挺細心的(辦理事情申請補助問太多細節!?)。男性覺得我個性很好，女性會覺得我溫柔，我上網查溫柔可能遇到衝突少跟人吵架吧...(膽大可能是做好最壞的打算，通常是對事情做最壞的打算)"},
-                {title:"為了成為軟體工程師，曾做了哪些努力?",
-                    content:"參加過勞動部委外民間的課程，如DJANGO、PHP、OPENCV/FACE68、Arduino自走車、app inventor 2...等，購買udemy課程來看後來發現Youtube或bilibili也可學到許多了，彭彭老師的YT絕對是主力、其餘還有看ALEX宅幹嘛、小馬技術、六角的校長與卡斯柏...等"},
-                {title:"如果參與這個計劃，會怎麼安排學習時間?",
-                    content:"最重要的事情安排在精力最好的時候做效果最好，一天只做一兩件重要的事情(類似自助旅遊先去重點+漫遊附近的景點，別安排太多)。先做最困難裡最簡單的事情，讓自己先動起來(搭配番茄時鐘保持專注)"},
-                {title:"是否有想要加入的軟體公司?為什麼想加入該公司?",
-                    content:"想加入寫後端或寫平台的公司，喜歡技術變動慢點，這樣比較有機會深入"},
-                {title:"想描述一件你曾經碰到最困難的事情，如何克服?",
-                    content:"最困難的事情算是沒自信而不敢動，萬事起頭難。起頭難是應為自信不足，這時必須去親身執行累積相關經驗，進而得到自信(在過程中就會讓自己動起來+得到多巴胺的加持)"},
-                {title:"關於這份申請網頁，請分享一個你開發時使用的技術心得。",
-                    content:"使用了Vue實現SPA單頁應用渲染,使用border-box解決padding異常"},
-            ]
-          }
-        });
-      </script>
-      
-</body>
+      new Vue({
+        el: "#app",
+        data: {
+          data: [
+            {
+              title: "兩百字內的個人簡介。",
+              content:
+                "我是江昱嶔屬於膽大心細+溫柔的人，覺得不重要的會很粗心，覺得重要的事情也是挺鑽牛角尖的。膽子可能也比一般人大些，二十年前在2001年就敢把好幾年過年壓歲錢跟零用錢存下來自己裝電腦安裝系統，在現在也敢自己換智慧型手機的螢幕/電池，或第一次出國就是一個人自助旅行(路人覺得我挺大膽的)，至於心細則是上職訓櫃檯小姐覺得我還挺細心的(辦理事情申請補助問太多細節!?)。男性覺得我個性很好，女性會覺得我溫柔，我上網查溫柔可能遇到衝突少跟人吵架吧...(膽大可能是做好最壞的打算，通常是對事情做最壞的打算)",
+            },
+            {
+              title: "為了成為軟體工程師，曾做了哪些努力?",
+              content:
+                "參加過勞動部委外民間的課程，如DJANGO、PHP、OPENCV/FACE68、Arduino自走車、app inventor 2...等，購買udemy課程來看後來發現Youtube或bilibili也可學到許多了，彭彭老師的YT絕對是主力、其餘還有看ALEX宅幹嘛、小馬技術、六角的校長與卡斯柏...等",
+            },
+            {
+              title: "如果參與這個計劃，會怎麼安排學習時間?",
+              content:
+                "最重要的事情安排在精力最好的時候做效果最好，一天只做一兩件重要的事情(類似自助旅遊先去重點+漫遊附近的景點，別安排太多)。先做最困難裡最簡單的事情，讓自己先動起來(搭配番茄時鐘保持專注)",
+            },
+            {
+              title: "是否有想要加入的軟體公司?為什麼想加入該公司?",
+              content:
+                "想加入寫後端或寫平台的公司，喜歡技術變動慢點，這樣比較有機會深入",
+            },
+            {
+              title: "想描述一件你曾經碰到最困難的事情，如何克服?",
+              content:
+                "最困難的事情算是沒自信而不敢動，萬事起頭難。起頭難是應為自信不足，這時必須去親身執行累積相關經驗，進而得到自信(在過程中就會讓自己動起來+得到多巴胺的加持)",
+            },
+            {
+              title: "關於這份申請網頁，請分享一個你開發時使用的技術心得。",
+              content:
+                "使用了Vue實現SPA單頁應用渲染,使用border-box解決padding排版異常",
+            },
+          ],
+        },
+      });
+    </script>
+  </body>
 </html>
