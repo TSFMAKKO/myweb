@@ -18,65 +18,8 @@
   </head>
   <body>
     <img data-src="./image.jpg" alt="觀察者" id="img1" />
+    <script src="./觀看者延遲載入.js"></script>
     <script>
-      class Subject {
-        constructor() {
-          this.observers = [];
-          this.imageLoaded = false;
-        }
-
-        addObserver(observer) {
-          this.observers.push(observer);
-        }
-
-        notifyObservers() {
-          for (const observer of this.observers) {
-            observer.update();
-          }
-        }
-
-        observeImages() {
-          const images = document.querySelectorAll("img[data-src]");
-          images.forEach((image) => {
-            const src = image.getAttribute("data-src");
-            const newImage = new Image();
-            newImage.src = src;
-            newImage.onload = () => {
-              setInterval(() => {
-                image.src = src;
-                image.removeAttribute("data-src");
-                this.checkImageLoadingComplete();
-              }, 3000);
-            };
-          });
-        }
-
-        checkImageLoadingComplete() {
-          const images = document.querySelectorAll("img[data-src]");
-          if (images.length === 0) {
-            this.imageLoaded = true;
-            this.notifyObservers();
-          }
-        }
-      }
-
-      class Observer {
-        constructor(name) {
-          this.name = name;
-        }
-
-        update() {
-          console.log(`${this.name} 收到通知，圖片已載入`);
-          // 在這裡進行相應的DOM操作或其他處理
-        }
-      }
-
-      const subject = new Subject();
-      const observer = new Observer("觀察者");
-
-      subject.addObserver(observer); // 註冊觀察者
-
-      subject.observeImages(); // 開始觀察DOM元素的圖片延遲載入
     </script>
   </body>
 </html>
