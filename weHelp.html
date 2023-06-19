@@ -144,7 +144,8 @@
     </div>
 
     <div id="app" class="flex" v-cloak>
-      <div class="container">
+      <div v-show="data_loading">資料載入中...</div>
+      <div v-show="!data_loading" class="container">
         <!-- <transition-group name="slide"> -->
         <section
           v-for="d,i in data"
@@ -164,6 +165,7 @@
       new Vue({
         el: "#app",
         data: {
+          data_loading:true,
           data: [],
           data2: [
             {
@@ -200,14 +202,26 @@
         },
         mounted() {
           this.$nextTick(() => {
-            this.data2.forEach((element, i) => {
-              setTimeout(() => {
-                console.log(element, element.title);
-                this.data.push({
-                  title: element.title,
-                  content: element.content,
-                });
-              }, i * 500);
+            const body = document.querySelector("body");
+            const backgroundImage = new Image();
+            backgroundImage.src =
+              getComputedStyle(body).backgroundImage.match(
+                /url\("?(.+?)"?\)/
+              )[1];
+            backgroundImage.addEventListener("load", () => {
+              // 在背景圖片載入完成後執行操作
+              this.data_loading=false;
+
+              console.log("背景圖片載入完成，可以執行操作了");
+              this.data2.forEach((element, i) => {
+                setTimeout(() => {
+                  console.log(element, element.title);
+                  this.data.push({
+                    title: element.title,
+                    content: element.content,
+                  });
+                }, i * 500);
+              });
             });
           });
         },
