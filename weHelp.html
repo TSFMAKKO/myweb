@@ -141,6 +141,7 @@
         color: red;
         margin-top: 20px;
         font-size: 32px;
+        margin-left: 8px;
       }
     </style>
   </head>
@@ -149,9 +150,10 @@
       <h1>WeHelp申請書</h1>
     </div>
 
+    <div class="data_loading">資料載入中...</div>
     <div id="app" class="flex" v-cloak>
-      <div v-show="data_loading" class="data_loading">資料載入中...</div>
-      <div v-show="!data_loading" class="container">
+      
+      <div class="container">
         <!-- <transition-group name="slide"> -->
         <section
           v-for="d,i in data"
@@ -171,7 +173,7 @@
       new Vue({
         el: "#app",
         data: {
-          data_loading:true,
+        //   data_loading:true,
           data: [],
           data2: [
             {
@@ -207,7 +209,7 @@
           ],
         },
         mounted() {
-        //   this.$nextTick(() => {
+          this.$nextTick(() => {
             const body = document.querySelector("body");
             const backgroundImage = new Image();
             backgroundImage.src =
@@ -216,7 +218,8 @@
               )[1];
             backgroundImage.addEventListener("load", () => {
               // 在背景圖片載入完成後執行操作
-              this.data_loading=false;
+              document.querySelector('.data_loading').style.display="none";
+            //   this.data_loading=false;
 
               console.log("背景圖片載入完成，可以執行操作了");
               this.data2.forEach((element, i) => {
@@ -229,7 +232,7 @@
                 }, i * 500);
               });
             });
-        //   });
+          });
         },
       });
     </script>
