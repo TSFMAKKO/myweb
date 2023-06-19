@@ -121,7 +121,7 @@
     <div id="app" class="flex">
       <div class="container">
         <!-- <transition-group name="slide"> -->
-        <section v-for="d in data" class="section-animation">
+        <section v-for="(d,i) in data" :id="'section'+i" class="section-animation">
           <div class="title">{{d.title}}</div>
           <hr />
           <div class="content">{{d.content}}</div>
