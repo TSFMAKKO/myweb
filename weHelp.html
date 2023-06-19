@@ -111,6 +111,10 @@
     opacity: 0;
     transform: translateY(50%);
     }
+
+    [v-cloak] {
+  display: none;
+}
     </style>
   </head>
   <body>
@@ -118,10 +122,10 @@
       <h1>WeHelp申請書</h1>
     </div>
 
-    <div id="app" class="flex">
+    <div id="app" class="flex" v-cloak>
       <div class="container">
         <!-- <transition-group name="slide"> -->
-        <section v-for="(d,i) in data" :id="'section'+i" class="section-animation">
+        <section v-for="d,i in data" :id="'section'+i" class="section-animation">
           <div class="title">{{d.title}}</div>
           <hr />
           <div class="content">{{d.content}}</div>
