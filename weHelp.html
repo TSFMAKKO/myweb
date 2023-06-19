@@ -21,7 +21,11 @@
         min-height: 100vh;
       }
       .header {
-        background: linear-gradient(to right, #045de9, #3498db);
+        /* background: linear-gradient(to right, #045de9, #3498db); */
+        background: linear-gradient(to right, #045de9, #9f876c);
+        /* background: linear-gradient(to bottom, #c8a783, #9f876c); */
+        background-size: 200% 200%;
+        animation: gradientAnimation 10s ease-in-out infinite;
         /* text-align: center; */
         width: 100%;
         display: flex;
@@ -33,6 +37,18 @@
         clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
         /* clip-path: polygon(0 0, 75% 25%, 75% 25%, 25% 75%); */
       }
+
+      @keyframes gradientAnimation {
+        0% {
+        background-position: 0% 50%;
+        }
+        50% {
+        background-position: 100% 50%;
+        }
+        100% {
+        background-position: 0% 50%;
+        }
+    }
 
 
       .flex {
