@@ -34,22 +34,28 @@
         height: 50px;
         /* clip-path: polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%, 10% 50%); */
         /* clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); */
-        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        clip-path: polygon(
+          50% 0%,
+          100% 25%,
+          100% 75%,
+          50% 100%,
+          0% 75%,
+          0% 25%
+        );
         /* clip-path: polygon(0 0, 75% 25%, 75% 25%, 25% 75%); */
       }
 
       @keyframes gradientAnimation {
         0% {
-        background-position: 0% 50%;
+          background-position: 0% 50%;
         }
         50% {
-        background-position: 100% 50%;
+          background-position: 100% 50%;
         }
         100% {
-        background-position: 0% 50%;
+          background-position: 0% 50%;
         }
-    }
-
+      }
 
       .flex {
         display: flex;
@@ -83,21 +89,20 @@
         font-weight: bold;
       }
 
-
       @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-  .section-animation {
-    animation: fadeIn 0.5s ease-in-out;
-  }
+      .section-animation {
+        animation: fadeIn 0.5s ease-in-out;
+      }
       @media (max-width: 767px) {
         .container {
           width: 90%;
@@ -116,22 +121,21 @@
         }
       }
 
+      .slide-enter-active,
+      .slide-leave-active {
+        opacity: 1;
+        transition: transform ease-in-out 0.5s;
+      }
 
-    .slide-enter-active,
-    .slide-leave-active {
-    opacity: 1;
-    transition: transform ease-in-out 0.5s;
-    }
+      .slide-enter,
+      .slide-leave-to {
+        opacity: 0;
+        transform: translateY(50%);
+      }
 
-    .slide-enter,
-    .slide-leave-to {
-    opacity: 0;
-    transform: translateY(50%);
-    }
-
-    [v-cloak] {
-  display: none;
-}
+      [v-cloak] {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -142,12 +146,16 @@
     <div id="app" class="flex" v-cloak>
       <div class="container">
         <!-- <transition-group name="slide"> -->
-        <section v-for="d,i in data" :id="'section'+i" class="section-animation">
+        <section
+          v-for="d,i in data"
+          :id="'section'+i"
+          class="section-animation"
+        >
           <div class="title">{{d.title}}</div>
           <hr />
           <div class="content">{{d.content}}</div>
         </section>
-    <!-- </transition-group> -->
+        <!-- </transition-group> -->
       </div>
     </div>
 
@@ -156,7 +164,7 @@
       new Vue({
         el: "#app",
         data: {
-          data:[],
+          data: [],
           data2: [
             {
               title: "兩百字內的個人簡介。",
@@ -191,14 +199,17 @@
           ],
         },
         mounted() {
-            this.data2.forEach((element,i) => {
-
-            setTimeout(()=>{
-                console.log(element,element.title);
-                this.data.push({ title:element.title, content:element.content })
-            },i*500)
-
-        }); 
+          this.$nextTick(() => {
+            this.data2.forEach((element, i) => {
+              setTimeout(() => {
+                console.log(element, element.title);
+                this.data.push({
+                  title: element.title,
+                  content: element.content,
+                });
+              }, i * 500);
+            });
+          });
         },
       });
     </script>
