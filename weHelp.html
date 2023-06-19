@@ -136,6 +136,12 @@
       [v-cloak] {
         display: none;
       }
+
+      .data_loading{
+        color: red;
+        margin-top: 20px;
+        font-size: 32px;
+      }
     </style>
   </head>
   <body>
@@ -144,7 +150,7 @@
     </div>
 
     <div id="app" class="flex" v-cloak>
-      <div v-show="data_loading">資料載入中...</div>
+      <div v-show="data_loading" class="data_loading">資料載入中...</div>
       <div v-show="!data_loading" class="container">
         <!-- <transition-group name="slide"> -->
         <section
@@ -201,7 +207,7 @@
           ],
         },
         mounted() {
-          this.$nextTick(() => {
+        //   this.$nextTick(() => {
             const body = document.querySelector("body");
             const backgroundImage = new Image();
             backgroundImage.src =
@@ -223,7 +229,7 @@
                 }, i * 500);
               });
             });
-          });
+        //   });
         },
       });
     </script>
