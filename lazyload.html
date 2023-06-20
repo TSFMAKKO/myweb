@@ -86,21 +86,22 @@
         mounted() {
           // 創建觀察者
           this.$nextTick(() => {
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  console.log(`${entry.target.innerText} is visible`);
-                  entry.target.classList.add("active");
-                  observer.unobserve(entry.target);
-                }
-              });
-            });
+        //     const observer = new IntersectionObserver((entries) => {
+        //       entries.forEach((entry) => {
+        //         if (entry.isIntersecting) {
+        //           console.log(`${entry.target.innerText} is visible`);
+        //           entry.target.classList.add("active");
+        //           observer.unobserve(entry.target);
+        //         }
+        //       });
+        //     });
 
-            // 觀察每個元素是否顯示在畫面上
-            this.$refs.box.forEach((box) => {
-              observer.observe(box);
-              //   observer.observe(box, { childList: true, subtree: true });
-            });
+        //     // 觀察每個元素是否顯示在畫面上
+        //     this.$refs.box.forEach((box) => {
+        //       observer.observe(box);
+        //       //   observer.observe(box, { childList: true, subtree: true });
+        //     });
+
           });
         },
       });
@@ -108,8 +109,22 @@
       window.addEventListener("load", () => {
         console.log("全部載入完成 取消loading頁面");
         document.querySelector(".loading").style.display = "none";
-      });
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              console.log(`${entry.target.innerText} is visible`);
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        });
 
+        // 觀察每個元素是否顯示在畫面上
+        app.$refs.box.forEach((box) => {
+          observer.observe(box);
+          //   observer.observe(box, { childList: true, subtree: true });
+        });
+      });
     </script>
   </body>
 </html>
