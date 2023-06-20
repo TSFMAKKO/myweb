@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        bottom: 0;
+        box-sizing: border-box;
+      }
+      img {
+        max-width: 100%;
+        height: 100vh;
+      }
+
+      ul li {
+        width: 300px;
+        height: 200px;
+        font-size: 32px;
+        /* border: 1px solid #aaa; */
+        margin: 10px 20px;
+        margin: 20px;
+      }
+      .item {
+        /* visibility: hidden; */
+
+        overflow: hidden;
+      }
+      .item img {
+        opacity: 0;
+        transform: translateY(5%);
+        transition: ease-in-out 0.5s;
+        background: black;
+        width: 100%;
+      }
+      .item.active img {
+        opacity: 1;
+        transform: translateY(0%);
+        background: white;
+      }
+
+      #app {
+        position: relative;
+      }
+      .loading {
+        position: fixed;
+        width: 100%;
+        /* height: 300vh; */
+        background-color: aquamarine;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        font-size: 32px;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="loading">
+        <div class="loading-content">載入中...</div>
+      </div>
+      <img data-src="./image.jpg" alt="觀察者" id="img1" />
+      <ul>
+        <!-- 被看到的時候 套active -->
+        <li class="item" v-for="item,i in 20" :key="item" ref="box">
+          <!-- {{item}} -->
+          <img
+            :src="'https://picsum.photos/300/200?random=' + i"
+            alt="Random Image"
+          />
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+      let app = new Vue({
+        el: "#app",
+        data: {},
+        methods: {},
+        mounted() {
+          // 創建觀察者
+          this.$nextTick(() => {
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  console.log(`${entry.target.innerText} is visible`);
+                  entry.target.classList.add("active");
+                  observer.unobserve(entry.target);
+                }
+              });
+            });
+
+            // 觀察每個元素是否顯示在畫面上
+            this.$refs.box.forEach((box) => {
+              observer.observe(box);
+              //   observer.observe(box, { childList: true, subtree: true });
+            });
+          });
+        },
+      });
+
+      window.addEventListener("load", () => {
+        console.log("全部載入完成 取消loading頁面");
+        document.querySelector(".loading").style.display = "none";
+      });
+
+    </script>
+  </body>
+</html>
