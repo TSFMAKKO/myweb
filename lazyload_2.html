@@ -78,7 +78,8 @@
             <!-- 被看套的時候 套active -->
             <li class="item" v-for="item,i in 20" :key="item" ref="box">
                 <!-- {{item}} -->
-                <img ref="img" :data-src="'https://picsum.photos/300/200?random=' + i" alt="Random Image" />
+                <img v-if="(i+1)%5==0" ref="img" :data-src="'https://picsum.photos/300/200?random=' + i" :alt="'Random Image 5-' +i" />
+                <img v-else ref="img" :data-src="'https://picsum.photos/300/200?random=' + i" :alt="'Random Image' +i" />
             </li>
         </ul>
     </div>
@@ -140,7 +141,7 @@
                                 }
 
                                 // entry.target.classList.add("active");
-                                // observer.unobserve(entry.target);
+                                observer2.unobserve(entry.target);
                             }
                         });
                     });
@@ -177,7 +178,7 @@
 
         window.addEventListener("load", () => {
             console.log("全部載入完成");
-            scrollToTop();
+            // scrollToTop();
             setTimeout(() => {
                 document.querySelector(".loading").style.display = "none";
             }, 0);
