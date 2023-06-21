@@ -177,10 +177,10 @@
 
         window.addEventListener("load", () => {
             console.log("全部載入完成");
-            // setTimeout(() => {
-                scrollToTop();
+            scrollToTop();
+            setTimeout(() => {
                 document.querySelector(".loading").style.display = "none";
-            // }, 0);
+            }, 0);
         });
 
     </script>
