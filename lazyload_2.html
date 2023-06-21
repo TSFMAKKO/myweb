@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            bottom: 0;
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+            height: 100vh;
+        }
+
+        ul li {
+            width: 300px;
+            height: 200px;
+            font-size: 32px;
+            /* border: 1px solid #aaa; */
+            border-radius: 10px;
+            margin: 10px 20px;
+            margin: 20px;
+        }
+
+        .item {
+            /* visibility: hidden; */
+            opacity: 0;
+            transform: translateX(100%);
+            transition: transform 0.5s;
+            background: black;
+            overflow: hidden;
+        }
+
+        .item img {
+            width: 100%;
+        }
+
+        .item.active {
+            opacity: 1;
+            transform: translateY(0%);
+            background: white;
+        }
+
+        #app {
+            position: relative;
+        }
+
+        .loading {
+            position: fixed;
+            width: 100%;
+            /* height: 500vh; */
+            background-color: aquamarine;
+            top: 0;
+            left: 0;
+            z-index: 5;
+            font-size: 32px;
+            color: red;
+        }
+
+        /* style.css */
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="loading">
+            <div class="loading-content">載入中...</div>
+        </div>
+        <img data-src="./image.jpg" alt="觀察者" id="img1" />
+        <ul>
+            <!-- 被看套的時候 套active -->
+            <li class="item" v-for="item,i in 20" :key="item" ref="box">
+                <!-- {{item}} -->
+                <img ref="img" :data-src="'https://picsum.photos/300/200?random=' + i" alt="Random Image" />
+            </li>
+        </ul>
+    </div>
+
+    <!-- <script src="./觀看者延遲載入.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {},
+            methods: {},
+            created() {
+
+            },
+            mounted() {
+                // 初始化預先在入top看的見的img
+                for (let i = 0; i < 5; i++) {
+                    // this.$refs.img[i]["src"] = this.$refs.img[i]["data-src"]
+                    // console.log(this.$refs.img[i], this.$refs.img[i].getAttribute('data-src'));
+                    this.$refs.img[i].src = this.$refs.img[i].getAttribute('data-src')
+                }
+
+                // 創建觀察者
+                this.$nextTick(() => {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                // console.log(`${entry.target.innerText} is visible`);
+                                entry.target.classList.add("active");
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    });
+
+                    // 觀察每個元素是否顯示在畫面上
+                    this.$refs.box.forEach((box) => {
+                        observer.observe(box);
+
+                    });
+
+                    const observer2 = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                // console.log(entry.target);
+                                // console.log(`${entry.target.getAttribute("data-src")}`);
+                                // 然後把底下五層的src印出來!! 
+                                // console.log(entry.target.parentNode);
+                                // console.log(entry.target.parentNode.nextSibling.querySelector('img'));
+                                // console.log(entry.target.parentNode.nextSibling.nextSibling.querySelector('img'));
+                                // console.log(entry.target.parentNode.nextSibling.nextSibling.nextSibling.querySelector('img'));
+                                let parentNode = entry.target.parentNode.nextSibling.nextSibling;
+                                // let liNode_now=null;
+                                for (let i = 0; i < 5; i++) {
+                                    parentNode = parentNode.nextSibling
+                                    console.log(parentNode.querySelector('img'));
+                                    parentNode.querySelector('img').src = parentNode.querySelector('img').getAttribute('data-src')
+
+                                }
+
+                                // entry.target.classList.add("active");
+                                // observer.unobserve(entry.target);
+                            }
+                        });
+                    });
+
+                    // 觀察每個元素是否顯示在畫面上
+                    // load載入五個
+                    // 觀察者觀察index 4 9 13 改成index 2 7 11
+                    // 但一樣一次載入index 4 9 13的下面五個
+                    let imgs = this.$refs.img.map((img, i) => {
+                        if (i % 5 === 0 && i !== 0) {
+                            return this.$refs.img[i - 3];
+                        }
+                    }).filter(item => item !== undefined);
+
+                    console.log(imgs);
+                    imgs.forEach((img) => {
+                        observer2.observe(img);
+
+                    });
+
+                });
+            },
+        });
+
+        // 将页面滚动到最顶部
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                // behavior: 'smooth'
+            });
+        }
+
+
+
+        window.addEventListener("load", () => {
+            console.log("全部載入完成");
+            // setTimeout(() => {
+                scrollToTop();
+                document.querySelector(".loading").style.display = "none";
+            // }, 0);
+        });
+
+    </script>
+</body>
+
+</html>
