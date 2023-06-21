@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>lazy-load 2</title>
 
     <style>
         * {
@@ -101,6 +101,7 @@
                     // this.$refs.img[i]["src"] = this.$refs.img[i]["data-src"]
                     // console.log(this.$refs.img[i], this.$refs.img[i].getAttribute('data-src'));
                     this.$refs.img[i].src = this.$refs.img[i].getAttribute('data-src')
+                    this.$refs.img[i].removeAttribute('data-src')
                 }
 
                 // 創建觀察者
@@ -137,7 +138,7 @@
                                     parentNode = parentNode.nextSibling
                                     console.log(parentNode.querySelector('img'));
                                     parentNode.querySelector('img').src = parentNode.querySelector('img').getAttribute('data-src')
-
+                                    parentNode.querySelector('img').removeAttribute('data-src')
                                 }
 
                                 // entry.target.classList.add("active");
